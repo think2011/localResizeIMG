@@ -1,10 +1,14 @@
 [].forEach.call(document.querySelectorAll('[data-src]'), function (el) {
     (function (el) {
-        el.src = 'img/loading.gif';
+        el.addEventListener('click', function () {
+            el.src = 'img/loading.gif';
 
-        lrz(el.dataset.src).then(function (rst) {
-            el.src = rst.base64;
+            lrz(el.dataset.src).then(function (rst) {
+                el.src = rst.base64;
+            });
         });
+
+        el.click();
     })(el);
 });
 

@@ -8,6 +8,9 @@
     })(el);
 });
 
+
+11111
+
 document.querySelector('input').addEventListener('change', function () {
     var that = this;
 

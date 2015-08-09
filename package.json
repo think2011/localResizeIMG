@@ -1,12 +1,25 @@
 {
-  "name": "lrz4",
-  "version": "4.0.1",
-  "description": "",
-  "main": "index.js",
+  "name": "lrz",
+  "version": "4.1.2",
+  "description": "前端本地客户端压缩图片，兼容IOS，Android，PC、自动按需加载文件",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/think2011/localResizeIMG4.git"
+  },
+  "keywords": [
+    "lrz",
+    "localResizeIMG",
+    "前端压缩图片",
+    "前端图片压缩",
+    "压缩图片"
+  ],
+  "bugs": {
+    "url": "https://github.com/think2011/localResizeIMG4/issues"
+  },
+  "author": "think2011",
   "license": "MIT",
   "devDependencies": {
     "gulp": "^3.9.0",

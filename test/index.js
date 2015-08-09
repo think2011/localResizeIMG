@@ -29,7 +29,7 @@ document.querySelector('input').addEventListener('change', function () {
                 resultSize + 'KB (省' + scale + '%)' +
                 '</span> ';
 
-            //div.className = 'col-xs-6';
+            div.className = 'col-sm-6';
             div.appendChild(img);
             div.appendChild(p);
 

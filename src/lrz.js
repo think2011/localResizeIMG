@@ -1,11 +1,28 @@
 // 保证按需加载的文件路径正确
 __webpack_public_path__ = getCurrentJsDir() + '/';
+window.URL              = window.URL || window.webkitURL;
 
 var Promise = require('Promise'),
-    exif    = require('exif'),
-    ua      = require('detect').parse(navigator.userAgent);
+    exif    = require('exif');
 
-window.URL = window.URL || window.webkitURL;
+// 判断设备是否是IOS7以下
+var isOldIOS = (function (userAgent) {
+    var rst = /OS (\d)_.* like Mac OS X/g.exec(userAgent);
+
+    if (rst === null) return false;
+
+    return +rst.pop() < 8;
+})(navigator.userAgent);
+
+// 判断设备是否是android4.5以下
+var isOldAndroid = (function (userAgent) {
+    var rst = /Android (\d.*?);/g.exec(userAgent);
+
+    if (rst === null) return false;
+
+    return +(rst.pop().substr(0, 3)) < 4.5;
+})(navigator.userAgent);
+
 
 function Lrz (file, opts) {
     var that = this;
@@ -95,14 +112,10 @@ Lrz.prototype._getBase64 = function () {
             that.ctx.fillStyle = '#fff';
             that.ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-            // 针对IOS6&7
-            if (ua.os.family === 'iOS' && parseInt(ua.os.version) < 8) {
-                that._createBase64ForOldIOS().then(resolve);
-            }
-            // 其他设备
-            else {
-                that._createBase64().then(resolve);
-            }
+            // 根据设备进行不同处理
+            isOldIOS
+                ? that._createBase64ForOldIOS().then(resolve)
+                : that._createBase64().then(resolve);
         });
     });
 };
@@ -145,7 +158,7 @@ Lrz.prototype._createBase64 = function () {
         defaults    = that.defaults,
         orientation = that.orientation;
 
-
+    // 调整为正确方向
     switch (orientation) {
         case 3:
             ctx.rotate(180 * Math.PI / 180);
@@ -190,7 +203,7 @@ Lrz.prototype._createBase64 = function () {
 
     return new Promise(function (resolve) {
         // 针对低于4.5版本的android
-        if (ua.os.family === 'Android' && ua.os.version.slice(0, 3) < 4.5) {
+        if (isOldAndroid) {
             require(['jpeg_encoder_basic'], function (JPEGEncoder) {
                 var encoder = new JPEGEncoder(),
                     img     = ctx.getImageData(0, 0, canvas.width, canvas.height);
@@ -198,7 +211,6 @@ Lrz.prototype._createBase64 = function () {
                 resolve(encoder.encode(img, defaults.quality * 100));
             })
         }
-        // 默认设备
         else {
             resolve(canvas.toDataURL('image/jpeg', defaults.quality));
         }
@@ -274,7 +286,7 @@ window.lrz = function (file, opts) {
     return new Lrz(file, opts);
 };
 
-// 版本号来自package.json
+// 版本号来自package.json，构建时自动填充
 window.lrz.version = '__packageJSON.version__';
 
 module.exports = window.lrz;

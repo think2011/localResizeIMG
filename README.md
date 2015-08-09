@@ -5,6 +5,8 @@
 # 自己试试
 
 ![](http://think2011.github.io/localResizeIMG4/test/qrcode.png)
+
+
 [点我直接进入演示页面](http://think2011.github.io/localResizeIMG4/test/)
 
 

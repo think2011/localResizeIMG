@@ -8,8 +8,6 @@
     })(el);
 });
 
-1111
-
 document.querySelector('input').addEventListener('change', function () {
     var that = this;
 

@@ -1,8 +1,15 @@
-# 原因
+# 演示一下
 
-直接在前端压缩好要上传的图片，可以更快的将图片发送给后端，因此也特别适合在移动设备上使用。
+![](http://think2011.github.io/localResizeIMG4/test/demo.gif)
 
-# 介绍
+# 自己试试
+
+![](http://think2011.github.io/localResizeIMG4/test/qrcode.png)
+[点我直接进入演示页面](http://think2011.github.io/localResizeIMG4/test/)
+
+
+# 介绍说明
+在前端压缩好要上传的图片可以更快的发送给后端，因此也特别适合在移动设备上使用。
 
 * 兼容IOS&Android，修复了IOS和Android某些版本已知的BUG（`这也是插件最有意义的存在价值`）。
 
@@ -10,16 +17,7 @@
 
 * 原生JS编写，不依赖例如`jquery`等第三方库。
 
-# 演示
-
-![](http://think2011.github.io/localResizeIMG4/test/demo.gif)
-
-# 试试
-
-![](http://think2011.github.io/localResizeIMG4/test/qrcode.png)
-[点我直接进入演示页面](http://think2011.github.io/localResizeIMG4/test/)
-
-# 安装
+# 如何获取
 
 通过以下方式都可以下载：
 
@@ -33,7 +31,7 @@
 ```
 `请绝对不要删除【dist】目录下的任何文件，那些是某些情况自动按需载入的文件。`
 
-# 使用
+# 如何使用
 
 ### 方式1:
 
@@ -76,7 +74,7 @@ lrz('./xxx/xx/x.png')
         });
 ```
 
-# 后端
+# 后端处理
 
 * 后端最终会收到前端发送的`base64`字符串，接着处理字符串为图片即可。
 

@@ -8,9 +8,6 @@
                     el.src = rst.base64;
 
                     return rst;
-                })
-                .then(function (rst) {
-                    console.log(rst);
                 });
         });
 

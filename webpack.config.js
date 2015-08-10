@@ -1,3 +1,5 @@
+var path = require('path');
+
 var paths = {
     src : './src',
     dist: './dist'
@@ -20,4 +22,5 @@ module.exports = {
             paths.src + '/lib'
         ]
     }
-};
+}
+;

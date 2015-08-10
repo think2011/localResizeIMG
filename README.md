@@ -1,3 +1,6 @@
+[![Build Status](https://travis-ci.org/think2011/localResizeIMG4.svg?branch=master)](https://travis-ci.org/think2011/localResizeIMG4)
+[![npm version](https://img.shields.io/npm/v/lrz.svg)](https://www.npmjs.com/package/lrz)
+
 # 演示一下
 
 ![](http://think2011.github.io/localResizeIMG4/test/demo.gif)

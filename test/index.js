@@ -3,9 +3,15 @@
         el.addEventListener('click', function () {
             el.src = 'img/loading.gif';
 
-            lrz(el.dataset.src).then(function (rst) {
-                el.src = rst.base64;
-            });
+            lrz(el.dataset.src)
+                .then(function (rst) {
+                    el.src = rst.base64;
+
+                    return rst;
+                })
+                .then(function (rst) {
+                    console.log(rst);
+                });
         });
 
         el.click();
@@ -42,6 +48,8 @@ document.querySelector('input').addEventListener('change', function () {
             };
 
             img.src = rst.base64;
+
+            return rst;
         });
 });
 

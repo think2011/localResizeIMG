@@ -74,6 +74,7 @@ Lrz.prototype.init = function () {
                 })
                 .then(function (base64) {
                     resolve({
+                        origin   : that.file,
                         base64   : base64,
                         base64Len: base64.length
                     });

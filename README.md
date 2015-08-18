@@ -100,10 +100,13 @@ IE9以上及大部分非IE浏览器（chrome、微信什么的）
 
 [有疑问请直接在 issues 中提问 🙈](https://github.com/think2011/localResizeIMG4/issues)
 
-请附上以下内容：
+顺便附上以下内容吧：
+
+```
 平台：微信
 设备：iPhone5 IOS7
 问题：问题描述呗..
+```
 
 * Q：有时拍摄完照片后，页面自动刷新或闪退了。
 * A：虽然已作了优化处理，但内存似乎还是爆掉了，常见于低配android手机。

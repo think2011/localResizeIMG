@@ -101,8 +101,8 @@ IE9以上及大部分非IE浏览器（chrome、微信什么的）
 [有疑问请直接在 issues 中提问 🙈](https://github.com/think2011/localResizeIMG4/issues)，顺便附上以下内容吧：
 
 ```
-平台：微信
-设备：iPhone5 IOS7
+平台：微信..
+设备：iPhone5 IOS7..
 问题：问题描述呗..
 ```
 

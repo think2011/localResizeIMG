@@ -1,0 +1,28 @@
+{
+  "name": "lrz",
+  "version": "4.1.4",
+  "homepage": "https://github.com/think2011/localResizeIMG4",
+  "authors": [
+    "think2011 <452125301@qq.com>"
+  ],
+  "description": "前端本地客户端压缩图片，兼容IOS，Android，PC、自动按需加载文件",
+  "main": "dist/lrz.bundle.js",
+  "keywords": [
+    "lrz",
+    "localResizeIMG",
+    "前端压缩图片",
+    "前端图片压缩",
+    "压缩图片"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests",
+    "src",
+    "gulpfile.js",
+    "webpack.config.js"
+  ]
+}

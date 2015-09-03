@@ -52,6 +52,7 @@ document.querySelector('input').addEventListener('change', function () {
 });
 
 document.querySelector('#version').innerHTML = lrz.version;
+document.querySelector('.UA').innerHTML = 'UA: ' + navigator.userAgent;
 
 function toFixed2 (num) {
     return parseFloat(+num.toFixed(2));

@@ -12,10 +12,18 @@
             max-width: 320px;
             padding: 10px 15px;
         }
+
+        .tip {
+            position: relative;
+            top: 15px;
+            right: 10px;
+        }
     </style>
 </head>
 <body>
 <div class="navbar navbar-default">
+    <div class="pull-right tip text-muted">遇到问题时请截图此页到 <a href="https://github.com/think2011/localResizeIMG4/issues">issues</a>
+    </div>
     <div class="container">
         <div class="navbar-header">
             <a href="./" class="navbar-brand">Lrz4</a>
@@ -29,10 +37,12 @@
         <div class="col-xs-12 text-center">
             <h3 style="margin-top: 0;">上传图片测试</h3>
             <small class="text-muted">配置：宽度不超过1024，高度适应，70%压缩率</small>
+            <br/>
+            <small class="text-muted UA">UA</small>
             <hr/>
         </div>
 
-        <div class="col-xs-12 text-center">
+        <div class="col-xs-12 text-warning text-center">
             <input capture="camera" type="file"/>
         </div>
 

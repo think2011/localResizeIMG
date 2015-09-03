@@ -7,7 +7,8 @@ var paths = {
 
 module.exports = {
     entry: {
-        lrz: paths.src + '/lrz'
+        lrz      : paths.src + '/lrz',
+        'lrz.all': paths.src + '/lrz.all'
     },
 
     output: {

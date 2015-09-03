@@ -54,7 +54,7 @@ gulp.task('dev:js', function () {
 });
 
 gulp.task('build:js', function () {
-    return gulp.src(files.js)
+    return gulp.src(paths.src + "/lrz.js")
         .pipe(plugins.webpack(webpackConfig))
         .pipe(plugins.replace(/__packageJSON\.version__/g, packageJSON.version))
         .pipe(plugins.uglify())

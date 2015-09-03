@@ -39,5 +39,9 @@
     "mocha": "^2.2.5",
     "phantomjs": "^1.9.17",
     "webpack": "^1.11.0"
+  },
+  "dependencies": {
+    "gulp-insert": "^0.5.0",
+    "gulp-rename": "^1.2.2"
   }
 }

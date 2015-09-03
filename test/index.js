@@ -1,3 +1,18 @@
+window.onerror = function (errMsg, scriptURI, lineNumber, columnNumber, errorObj) {
+    setTimeout(function () {
+        var rst = {
+            "错误信息：": errMsg,
+            "出错文件：": scriptURI,
+            "出错行号：": lineNumber,
+            "出错列号：": columnNumber,
+            "错误详情：": errorObj
+        };
+
+        alert('出错了，下一步将显示错误信息');
+        alert(JSON.stringify(rst, null, 10));
+    });
+};
+
 [].forEach.call(document.querySelectorAll('[data-src]'), function (el) {
     (function (el) {
         el.addEventListener('click', function () {
@@ -52,7 +67,7 @@ document.querySelector('input').addEventListener('change', function () {
 });
 
 document.querySelector('#version').innerHTML = lrz.version;
-document.querySelector('.UA').innerHTML = 'UA: ' + navigator.userAgent;
+document.querySelector('.UA').innerHTML      = 'UA: ' + navigator.userAgent;
 
 function toFixed2 (num) {
     return parseFloat(+num.toFixed(2));

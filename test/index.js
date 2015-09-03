@@ -26,13 +26,14 @@ document.querySelector('input').addEventListener('change', function () {
                 div        = document.createElement('div'),
                 p          = document.createElement('p'),
                 sourceSize = toFixed2(that.files[0].size / 1024),
-                resultSize = toFixed2(rst.base64Len * 0.8 / 1024),
+                resultSize = toFixed2(rst.base64Len / 1024),
                 scale      = parseInt(100 - (resultSize / sourceSize * 100));
 
             p.style.fontSize = 13 + 'px';
             p.innerHTML      = '源文件：<span class="text-danger">' +
                 sourceSize + 'KB' +
-                '</span>，压缩后<span class="text-success">' +
+                '</span> <br />' +
+                '压缩后传输Base64：<span class="text-success">' +
                 resultSize + 'KB (省' + scale + '%)' +
                 '</span> ';
 
@@ -55,6 +56,24 @@ document.querySelector('#version').innerHTML = lrz.version;
 function toFixed2 (num) {
     return parseFloat(+num.toFixed(2));
 }
+
+/**
+ * 替换字符串 !{}
+ * @param obj
+ * @returns {String}
+ * @example
+ * '我是!{str}'.render({str: '测试'});
+ */
+String.prototype.render = function (obj) {
+    var str = this, reg;
+
+    Object.keys(obj).forEach(function (v) {
+        reg = new RegExp('\\!\\{' + v + '\\}', 'g');
+        str = str.replace(reg, obj[v]);
+    });
+
+    return str;
+};
 
 /**
  *

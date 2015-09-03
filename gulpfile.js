@@ -11,6 +11,7 @@ var paths = {
 
 var files = {
     js  : [paths.src + "/**/*.js"],
+    txt : [paths.src + "/**/*.txt"],
     html: paths.test + '/**/*.html'
 };
 
@@ -30,9 +31,11 @@ gulp.task('dev', function () {
 gulp.task('build', ['clean'], function () {
     gulp.start([
         'build:js',
-        'build:html'
+        'build:html',
+        'build:copy'
     ]);
 });
+
 
 // 监听
 gulp.task('watch', ['dev'], function () {
@@ -65,4 +68,9 @@ gulp.task('build:html', ['build:js'], function () {
     return gulp.src(files.html)
         .pipe(plugins.staticHash({asset: paths.dist}))
         .pipe(gulp.dest(paths.test));
+});
+
+gulp.task('build:copy', function () {
+    return gulp.src(files.txt)
+        .pipe(gulp.dest(paths.dist));
 });

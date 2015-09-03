@@ -267,7 +267,7 @@ Lrz.prototype._getResize = function () {
     }
 
     // 超过这个值base64无法生成，在IOS上
-    if (ret.width >= 3264 || ret.height >= 2448) {
+    while (ret.width >= 3264 || ret.height >= 2448) {
         ret.width *= 0.8;
         ret.height *= 0.8;
     }

@@ -5,6 +5,7 @@ window.URL              = window.URL || window.webkitURL;
 var Promise = require('Promise'),
     exif    = require('exif');
 
+
 // 判断设备是否是IOS7以下
 var isOldIOS = (function (userAgent) {
     var rst = /OS (\d)_.* like Mac OS X/g.exec(userAgent);
@@ -23,6 +24,10 @@ var isOldAndroid = (function (userAgent) {
     return +(rst.pop().substr(0, 3)) < 4.5;
 })(navigator.userAgent);
 
+// 判断是否QQ浏览器
+var isMQQBrowser = (function (userAgent) {
+    return /MQQBrowser/g.test(userAgent);
+})(navigator.userAgent);
 
 function Lrz (file, opts) {
     var that = this;
@@ -205,8 +210,7 @@ Lrz.prototype._createBase64 = function () {
     }
 
     return new Promise(function (resolve) {
-        // 针对低于4.5版本的android
-        if (isOldAndroid) {
+        if (isOldAndroid || isMQQBrowser) {
             require(['jpeg_encoder_basic'], function (JPEGEncoder) {
                 var encoder = new JPEGEncoder(),
                     img     = ctx.getImageData(0, 0, canvas.width, canvas.height);

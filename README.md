@@ -121,7 +121,7 @@ IE9以上及大部分非IE浏览器（chrome、微信什么的）
 
 # 开发
 
-[想要参与 or 自己定制 or 了解源码请点击这里，源码逻辑和说明](https://github.com/think2011/localResizeIMG4/wiki/%E5%BC%80%E5%8F%91)
+[想要参与 or 自己定制 or 了解源码请点击这里，逻辑和说明](https://github.com/think2011/localResizeIMG4/wiki/%E5%BC%80%E5%8F%91)
 
 # 感谢
 

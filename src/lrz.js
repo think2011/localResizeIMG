@@ -5,27 +5,19 @@ window.URL              = window.URL || window.webkitURL;
 var Promise = require('Promise'),
     exif    = require('exif');
 
-// 判断设备是否是IOS7以下
-var isOldIOS = (function (userAgent) {
-    var rst = /OS (\d)_.* like Mac OS X/g.exec(userAgent);
-
-    if (rst === null) return false;
-
-    return +rst.pop() < 8;
-})(navigator.userAgent);
-
-// 判断设备是否是android4.5以下
-var isOldAndroid = (function (userAgent) {
-    var rst = /Android (\d.*?);/g.exec(userAgent);
-
-    if (rst === null) return false;
-
-    return +(rst.pop().substr(0, 3)) < 4.5;
-})(navigator.userAgent);
-
-// 判断是否QQ浏览器
-var isMQQBrowser = (function (userAgent) {
-    return /MQQBrowser/g.test(userAgent);
+var UA = (function (userAgent) {
+    // 判断设备是否是IOS7以下
+    // 判断设备是否是android4.5以下
+    // 判断是否iOS
+    // 判断是否android
+    // 判断是否QQ浏览器
+    return {
+        oldIOS    : +((/OS (\d)_.* like Mac OS X/g.exec(userAgent)).pop()) < 8,
+        oldAndroid: +((/Android (\d.*?);/g.exec(userAgent)).pop().substr(0, 3)) < 4.5,
+        iOS       : /\(i[^;]+;( U;)? CPU.+Mac OS X/.test(userAgent),
+        android   : /Android/g.test(userAgent),
+        mQQBrowser: /MQQBrowser/g.test(userAgent)
+    }
 })(navigator.userAgent);
 
 function Lrz (file, opts) {
@@ -119,7 +111,7 @@ Lrz.prototype._getBase64 = function () {
             that.ctx.fillRect(0, 0, canvas.width, canvas.height);
 
             // 根据设备进行不同处理
-            isOldIOS
+            UA.oldIOS
                 ? that._createBase64ForOldIOS().then(resolve)
                 : that._createBase64().then(resolve);
         });
@@ -208,7 +200,7 @@ Lrz.prototype._createBase64 = function () {
     }
 
     return new Promise(function (resolve) {
-        if (isOldAndroid || isMQQBrowser || !navigator.userAgent) {
+        if (UA.oldAndroid || UA.mQQBrowser || !navigator.userAgent) {
             require(['jpeg_encoder_basic'], function (JPEGEncoder) {
                 var encoder = new JPEGEncoder(),
                     img     = ctx.getImageData(0, 0, canvas.width, canvas.height);
@@ -235,7 +227,7 @@ Lrz.prototype._getResize = function () {
         height: img.height
     };
 
-    if ("5678".indexOf(orientation) > -1) {
+    if (orientation && ("5678".indexOf(orientation) > -1)) {
         ret.width  = img.height;
         ret.height = img.width;
     }

@@ -372,7 +372,7 @@
                     if (this.status == 200 || this.status === 0) {
                         handleBinaryFile(http.response);
                     } else {
-                        throw "Could not load image";
+                        callback(new Error("Could not load image"));
                     }
                     http = null;
                 };
@@ -643,7 +643,7 @@
     }
 
     function getStringFromDB (buffer, start, length) {
-        var outstr = "";
+        var outstr = "", n;
         for (n = start; n < start + length; n++) {
             outstr += String.fromCharCode(buffer.getUint8(n));
         }

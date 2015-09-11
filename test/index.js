@@ -1,4 +1,4 @@
-window.onerror = function (errMsg, scriptURI, lineNumber, columnNumber, errorObj) {
+/*window.onerror = function (errMsg, scriptURI, lineNumber, columnNumber, errorObj) {
     setTimeout(function () {
         var rst = {
             "错误信息：": errMsg,
@@ -11,7 +11,7 @@ window.onerror = function (errMsg, scriptURI, lineNumber, columnNumber, errorObj
         alert('出错了，下一步将显示错误信息');
         alert(JSON.stringify(rst, null, 10));
     });
-};
+};*/
 
 
 [].forEach.call(document.querySelectorAll('[data-src]'), function (el) {

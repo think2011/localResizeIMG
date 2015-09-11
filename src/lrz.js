@@ -6,14 +6,17 @@ var Promise = require('Promise'),
     exif    = require('exif');
 
 var UA = (function (userAgent) {
+    var ISOldIOS     = /OS (\d)_.* like Mac OS X/g.exec(userAgent),
+        isOldAndroid = /Android (\d.*?);/g.exec(userAgent);
+
     // 判断设备是否是IOS7以下
     // 判断设备是否是android4.5以下
     // 判断是否iOS
     // 判断是否android
     // 判断是否QQ浏览器
     return {
-        oldIOS    : +((/OS (\d)_.* like Mac OS X/g.exec(userAgent)).pop()) < 8,
-        oldAndroid: +((/Android (\d.*?);/g.exec(userAgent)).pop().substr(0, 3)) < 4.5,
+        oldIOS    : ISOldIOS ? +ISOldIOS.pop() < 8 : false,
+        oldAndroid: isOldAndroid ? +isOldAndroid.pop().substr(0, 3) < 4.5 : false,
         iOS       : /\(i[^;]+;( U;)? CPU.+Mac OS X/.test(userAgent),
         android   : /Android/g.test(userAgent),
         mQQBrowser: /MQQBrowser/g.test(userAgent)
@@ -95,13 +98,19 @@ Lrz.prototype.init = function () {
 Lrz.prototype._getBase64 = function () {
     var that   = this,
         img    = that.img,
+        file   = that.file,
         canvas = that.canvas;
 
+    var setCanvas = function () {
+    };
+
     return new Promise(function (resolve) {
-        exif.getData(img, function () {
+        // 传入blob在android4.3以下有bug
+        exif.getData(typeof file === 'object' ? file : img, function () {
             that.orientation = exif.getTag(this, "Orientation");
-            that.resize      = that._getResize();
-            that.ctx         = canvas.getContext('2d');
+
+            that.resize = that._getResize();
+            that.ctx    = canvas.getContext('2d');
 
             canvas.width  = that.resize.width;
             canvas.height = that.resize.height;
@@ -110,18 +119,23 @@ Lrz.prototype._getBase64 = function () {
             that.ctx.fillStyle = '#fff';
             that.ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-            // 根据设备进行不同处理
-            UA.oldIOS
-                ? that._createBase64ForOldIOS().then(resolve)
-                : that._createBase64().then(resolve);
+            // 根据设备对应处理方式
+            if (UA.oldIOS) {
+                that._createBase64ForOldIOS().then(resolve);
+            }
+            else {
+                that._createBase64().then(resolve);
+            }
         });
     });
 };
+
 
 Lrz.prototype._createBase64ForOldIOS = function () {
     var that        = this,
         img         = that.img,
         canvas      = that.canvas,
+        defaults    = that.defaults,
         orientation = that.orientation;
 
     return new Promise(function (resolve) {
@@ -142,7 +156,7 @@ Lrz.prototype._createBase64ForOldIOS = function () {
                 });
             }
 
-            resolve(canvas.toDataURL('image/jpeg', that.defaults.quality));
+            resolve(canvas.toDataURL('image/jpeg', defaults.quality));
         });
     });
 };
@@ -309,3 +323,5 @@ module.exports = window.lrz;
  * 　　　　　┗┻┛　┗┻┛
  *
  */
+
+

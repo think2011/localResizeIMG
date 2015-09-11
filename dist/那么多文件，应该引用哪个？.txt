@@ -1,0 +1,9 @@
+1. 一般情况仅需引用 【lrz.bundle.js】 即可。
+但绝对不要删除目录下的【*.chunk.js】，这2个文件分别对应了IOS和Android的兼容代码，检测到符合环境时会自动引入。
+
+2. 【lrz.all.bundle.js】是包含了所有引用了，莫名其妙的问题下就引用这个吧。
+例如：https://github.com/think2011/localResizeIMG4/issues/6
+
+3. 【*.map】文件是供调试用的，正式使用删不删除都没关系，因为仅在调试时才会载入。
+
+4. 支持AMD引入，CMD未测试，理论上是可以的。

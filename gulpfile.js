@@ -50,7 +50,7 @@ gulp.task('clean', function () {
 });
 
 gulp.task('dev:js', function () {
-    webpackConfig.devtool = ['source-map'];
+    //webpackConfig.devtool = ['source-map'];
 
     return gulp.src(files.js)
         .pipe(plugins.webpack(webpackConfig))

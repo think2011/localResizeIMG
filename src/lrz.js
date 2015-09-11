@@ -5,7 +5,6 @@ window.URL              = window.URL || window.webkitURL;
 var Promise = require('Promise'),
     exif    = require('exif');
 
-
 // 判断设备是否是IOS7以下
 var isOldIOS = (function (userAgent) {
     var rst = /OS (\d)_.* like Mac OS X/g.exec(userAgent);
@@ -66,7 +65,6 @@ Lrz.prototype.init = function () {
     if (!document.createElement('canvas').getContext) {
         throw new Error('浏览器不支持canvas');
     }
-
     return new Promise(function (resolve, reject) {
         img.onerror = function () {
             throw new Error('加载图片文件失败');
@@ -210,7 +208,7 @@ Lrz.prototype._createBase64 = function () {
     }
 
     return new Promise(function (resolve) {
-        if (isOldAndroid || isMQQBrowser) {
+        if (isOldAndroid || isMQQBrowser || !navigator.userAgent) {
             require(['jpeg_encoder_basic'], function (JPEGEncoder) {
                 var encoder = new JPEGEncoder(),
                     img     = ctx.getImageData(0, 0, canvas.width, canvas.height);

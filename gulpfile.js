@@ -2,6 +2,7 @@ var gulp          = require('gulp');
 var plugins       = require('gulp-load-plugins')();
 var webpackConfig = require('./webpack.config');
 var packageJSON   = require('./package.json');
+var webpack       = require("webpack");
 
 var paths = {
     src : './src',
@@ -57,10 +58,23 @@ gulp.task('dev:js', function () {
 });
 
 gulp.task('build:js', function () {
+    webpackConfig.devtool = ['source-map'];
+    webpackConfig.plugins = [
+        new webpack.optimize.UglifyJsPlugin({
+            compress : {
+                warnings: false
+            },
+            output   : {
+                comments  : false,
+                semicolons: true
+            },
+            sourceMap: true
+        })
+    ];
+
     return gulp.src(paths.src + "/lrz.js")
         .pipe(plugins.webpack(webpackConfig))
         .pipe(plugins.replace(/__packageJSON\.version__/g, packageJSON.version))
-        .pipe(plugins.uglify())
         .pipe(gulp.dest(paths.dist));
 });
 

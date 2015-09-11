@@ -13,6 +13,7 @@ window.onerror = function (errMsg, scriptURI, lineNumber, columnNumber, errorObj
     });
 };
 
+
 [].forEach.call(document.querySelectorAll('[data-src]'), function (el) {
     (function (el) {
         el.addEventListener('click', function () {
@@ -22,13 +23,15 @@ window.onerror = function (errMsg, scriptURI, lineNumber, columnNumber, errorObj
                 .then(function (rst) {
                     el.src = rst.base64;
 
+
                     return rst;
                 });
         });
 
-        el.click();
+        fireEvent(el, 'click');
     })(el);
 });
+
 
 document.querySelector('input').addEventListener('change', function () {
     var that = this;
@@ -90,6 +93,30 @@ String.prototype.render = function (obj) {
 
     return str;
 };
+
+/**
+ * 触发事件
+ * @param element
+ * @param event
+ * @returns {boolean}
+ */
+function fireEvent (element, event) {
+    var evt;
+
+    if (document.createEventObject) {
+        // IE浏览器支持fireEvent方法
+        evt = document.createEventObject();
+        return element.fireEvent('on' + event, evt)
+    }
+    else {
+        // 其他标准浏览器使用dispatchEvent方法
+        evt = document.createEvent('HTMLEvents');
+        // initEvent接受3个参数：
+        // 事件类型，是否冒泡，是否阻止浏览器的默认行为
+        evt.initEvent(event, true, true);
+        return !element.dispatchEvent(evt);
+    }
+}
 
 /**
  *

@@ -7,7 +7,7 @@ var Promise = require('Promise'),
 
 var UA = (function (userAgent) {
     var ISOldIOS     = /OS (\d)_.* like Mac OS X/g.exec(userAgent),
-        isOldAndroid = /Android (\d.*?);/g.exec(userAgent);
+        isOldAndroid = /Android (\d.*?);/g.exec(userAgent) || /Android\/(\d.*?) /g.exec(userAgent);
 
     // 判断设备是否是IOS7以下
     // 判断设备是否是android4.5以下

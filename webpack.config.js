@@ -13,7 +13,6 @@ module.exports = {
     },
 
     output: {
-        publicPath   : paths.dist + '/',
         filename     : "[name].bundle.js",
         chunkFilename: "[name].chunk.js"
     },
@@ -24,5 +23,4 @@ module.exports = {
             paths.src + '/lib'
         ]
     }
-}
-;
+};

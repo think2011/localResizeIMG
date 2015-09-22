@@ -1,9 +1,10 @@
 // 保证按需加载的文件路径正确
-__webpack_public_path__ = getCurrentJsDir() + '/';
+__webpack_public_path__ = getJsDir('lrz') + '/';
 window.URL              = window.URL || window.webkitURL;
 
 var Promise = require('Promise'),
     exif    = require('exif');
+
 
 var UA = (function (userAgent) {
     var ISOldIOS     = /OS (\d)_.* like Mac OS X/g.exec(userAgent),
@@ -287,10 +288,20 @@ Lrz.prototype._getResize = function () {
  * 获取当前js文件所在路径，必须得在代码顶部执行此函数
  * @returns {string}
  */
-function getCurrentJsDir () {
-    var src = document.scripts[document.scripts.length - 1].src;
+function getJsDir (src) {
+    var script = null;
 
-    return src.substr(0, src.lastIndexOf('/'));
+    if (src) {
+        script = [].filter.call(document.scripts, function (v) {
+            return v.src.indexOf(src) !== -1;
+        })[0];
+    } else {
+        script = document.scripts[document.scripts.length - 1];
+    }
+
+    if (!script) return null;
+
+    return script.src.substr(0, script.src.lastIndexOf('/'));
 }
 
 window.lrz = function (file, opts) {

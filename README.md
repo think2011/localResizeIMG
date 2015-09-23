@@ -45,7 +45,7 @@
 如果您的图片来自用户拍摄或者上传的，您需要一个`input file`来获取图片。
 
 ```html
-<input onchange="upload()" type="file" capture="camera" />
+<input onchange="upload()" type="file" accept="image/*" />
 ```
 
 接着通过change事件可以得到用户选择的图片

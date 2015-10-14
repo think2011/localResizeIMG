@@ -45,15 +45,16 @@
 如果您的图片来自用户拍摄或者上传的，您需要一个`input file`来获取图片。
 
 ```html
-<input onchange="upload()" type="file" accept="image/*" />
+<input id="file" type="file" accept="image/*" />
 ```
 
 接着通过change事件可以得到用户选择的图片
 ```js
-function upload () {
-    lrz(this.files[0])
+document.querySelector('#file').addEventListener('change', function () {
+	lrz(this.files[0])
         .then(function (rst) {
             // 处理成功会执行
+            console.log(rst);
         })
         .catch(function (err) {
             // 处理失败会执行

@@ -1,6 +1,6 @@
 {
   "name": "lrz",
-  "version": "4.2.6",
+  "version": "4.2.10",
   "description": "前端本地客户端压缩图片，兼容IOS，Android，PC、自动按需加载文件",
   "scripts": {
     "test": "node ./node_modules/karma/bin/karma start"

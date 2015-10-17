@@ -245,6 +245,14 @@ Lrz.prototype._getResize = function () {
     if (orientation && ("5678".indexOf(orientation) > -1)) {
         ret.width  = img.height;
         ret.height = img.width;
+
+        width  = defaults.height;
+        height = defaults.width;
+    }
+
+    // 如果原图小于设定，采用原图
+    if (ret.width < width || ret.height < height) {
+        return ret;
     }
 
     var scale = ret.width / ret.height;

@@ -95,7 +95,7 @@ String.prototype.render = function (obj) {
 };
 
 /**
- * 触发事件
+ * 触发事件 - 只是为了兼容演示demo而已
  * @param element
  * @param event
  * @returns {boolean}

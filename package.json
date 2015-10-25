@@ -1,29 +1,15 @@
 {
-  "name": "localResize",
-  "version": "2.0.0",
-  "description": "",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "author": "think2011",
-  "license": "BSD-2-Clause",
-  "dependencies": {
-    "coffee-script": "~1.8.0",
-    "gulp": "~3.8.8",
+  "name": "lrz",
+  "version": "0.0.1",
+  "devDependencies": {
+    "gulp": "^3.8.10",
     "gulp-clean": "^0.3.1",
-    "gulp-coffee": "^2.2.0",
-    "gulp-sourcemaps": "^1.2.4",
-    "gulp-watch": "^1.1.0",
-    "gulp-webserver": "~0.8.3",
-    "run-sequence": "^1.0.1",
-    "gulp-plumber": "~0.6.6",
-    "gulp-rename": "~1.2.0",
-    "gulp-uglify": "~1.0.1",
-    "gulp-concat": "~2.4.1",
-    "gulp-header": "~1.2.2",
-    "gulp-filter": "~1.0.2",
-    "gulp-minify-css": "~0.3.11",
-    "gulp-minify-html": "~0.1.6"
+    "gulp-concat": "^2.5.0",
+    "gulp-static-hash": "^0.1.2",
+    "gulp-uglify": "^1.0.2"
+  },
+  "dependencies": {
+    "body-parser": "^1.12.0",
+    "express": "^4.11.2"
   }
 }

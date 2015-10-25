@@ -1,0 +1,1 @@
+{"version":3,"sources":["localResize.jquery.coffee"],"names":[],"mappings":"AAAA;AAAA,EAAA,CAAC,SAAC,CAAD,GAAA,CAAD,CAAA,CAEE,MAFF,CAAA,CAAA;AAAA","file":"localResize.jquery.js","sourceRoot":"/source/","sourcesContent":["(($) ->\r\n\r\n) jQuery"]}

@@ -1,46 +1,29 @@
 {
-  "name": "lrz",
-  "version": "4.2.10",
-  "description": "前端本地客户端压缩图片，兼容IOS，Android，PC、自动按需加载文件",
+  "name": "localResize",
+  "version": "2.0.0",
+  "description": "",
+  "main": "index.js",
   "scripts": {
-    "test": "node ./node_modules/karma/bin/karma start"
-  },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/think2011/localResizeIMG4.git"
-  },
-  "keywords": [
-    "lrz",
-    "localResizeIMG",
-    "前端压缩图片",
-    "前端图片压缩",
-    "压缩图片"
-  ],
-  "bugs": {
-    "url": "https://github.com/think2011/localResizeIMG4/issues"
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "think2011",
-  "license": "MIT",
-  "devDependencies": {
-    "chai": "^3.2.0",
-    "gulp": "^3.9.0",
-    "gulp-clean": "^0.3.1",
-    "gulp-load-plugins": "^0.10.0",
-    "gulp-replace": "^0.5.4",
-    "gulp-static-hash": "^0.1.3",
-    "gulp-webpack": "^1.5.0",
-    "karma": "^0.13.8",
-    "karma-chai": "^0.1.0",
-    "karma-mocha": "^0.2.0",
-    "karma-phantomjs-launcher": "^0.2.1",
-    "karma-spec-reporter": "0.0.20",
-    "karma-webpack": "^1.7.0",
-    "mocha": "^2.2.5",
-    "phantomjs": "^1.9.17",
-    "webpack": "^1.11.0"
-  },
+  "license": "BSD-2-Clause",
   "dependencies": {
-    "gulp-insert": "^0.5.0",
-    "gulp-rename": "^1.2.2"
+    "coffee-script": "~1.8.0",
+    "gulp": "~3.8.8",
+    "gulp-clean": "^0.3.1",
+    "gulp-coffee": "^2.2.0",
+    "gulp-sourcemaps": "^1.2.4",
+    "gulp-watch": "^1.1.0",
+    "gulp-webserver": "~0.8.3",
+    "run-sequence": "^1.0.1",
+    "gulp-plumber": "~0.6.6",
+    "gulp-rename": "~1.2.0",
+    "gulp-uglify": "~1.0.1",
+    "gulp-concat": "~2.4.1",
+    "gulp-header": "~1.2.2",
+    "gulp-filter": "~1.0.2",
+    "gulp-minify-css": "~0.3.11",
+    "gulp-minify-html": "~0.1.6"
   }
 }

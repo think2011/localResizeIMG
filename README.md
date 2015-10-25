@@ -1,17 +1,17 @@
-[![Build Status](https://travis-ci.org/think2011/localResizeIMG4.svg?branch=master)](https://travis-ci.org/think2011/localResizeIMG4)
+[![Build Status](https://travis-ci.org/think2011/localResizeIMG.svg?branch=master)](https://travis-ci.org/think2011/localResizeIMG)
 [![npm version](https://img.shields.io/npm/v/lrz.svg)](https://www.npmjs.com/package/lrz)
 [![npm](https://img.shields.io/npm/l/express.svg)]()
 
 # 演示一下
 
-![](http://think2011.github.io/localResizeIMG4/test/demo.gif)
+![](http://think2011.github.io/localResizeIMG/test/demo.gif)
 
 # 自己试试
 
-![](http://think2011.github.io/localResizeIMG4/test/qrcode.png)
+![](http://think2011.github.io/localResizeIMG/test/qrcode.png)
 
 
-[点我直接进入演示页面](http://think2011.github.io/localResizeIMG4/test/)
+[点我直接进入演示页面](http://think2011.github.io/localResizeIMG/test/)
 
 
 # 介绍说明
@@ -91,7 +91,7 @@ lrz('./xxx/xx/x.png')
 
 # API
 
-[具体参数说明请查看WIKI。](https://github.com/think2011/localResizeIMG4/wiki)
+[具体参数说明请查看WIKI。](https://github.com/think2011/localResizeIMG/wiki)
 
 # 兼容性
 
@@ -99,7 +99,7 @@ IE9以上及大部分非IE浏览器（chrome、微信什么的）
 
 # FAQ
 
-[有疑问请直接在 issues 中提问 🙈](https://github.com/think2011/localResizeIMG4/issues)，顺便附上以下内容吧：
+[有疑问请直接在 issues 中提问 🙈](https://github.com/think2011/localResizeIMG/issues)，顺便附上以下内容吧：
 
 ```
 平台：微信..
@@ -121,7 +121,7 @@ IE9以上及大部分非IE浏览器（chrome、微信什么的）
 
 # 开发
 
-[想要参与 or 自己定制 or 了解源码请点击这里，逻辑和说明](https://github.com/think2011/localResizeIMG4/wiki/%E5%BC%80%E5%8F%91)
+[想要参与 or 自己定制 or 了解源码请点击这里，逻辑和说明](https://github.com/think2011/localResizeIMG/wiki/%E5%BC%80%E5%8F%91)
 
 # 感谢
 

@@ -27,7 +27,7 @@ var UA = (function (userAgent) {
 function Lrz (file, opts) {
     var that = this;
 
-    if (!file) throw new Error('没有收到图片，可能的解决方案：https://github.com/think2011/localResizeIMG4/issues/7');
+    if (!file) throw new Error('没有收到图片，可能的解决方案：https://github.com/think2011/localResizeIMG/issues/7');
 
     opts = opts || {};
 

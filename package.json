@@ -1,13 +1,13 @@
 {
   "name": "lrz",
-  "version": "4.2.10",
+  "version": "4.2.12",
   "description": "前端本地客户端压缩图片，兼容IOS，Android，PC、自动按需加载文件",
   "scripts": {
     "test": "node ./node_modules/karma/bin/karma start"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/think2011/localResizeIMG4.git"
+    "url": "https://github.com/think2011/localResizeIMG.git"
   },
   "keywords": [
     "lrz",
@@ -17,7 +17,7 @@
     "压缩图片"
   ],
   "bugs": {
-    "url": "https://github.com/think2011/localResizeIMG4/issues"
+    "url": "https://github.com/think2011/localResizeIMG/issues"
   },
   "author": "think2011",
   "license": "MIT",

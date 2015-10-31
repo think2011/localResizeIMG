@@ -14,7 +14,8 @@ module.exports = {
 
     output: {
         filename     : "[name].bundle.js",
-        chunkFilename: "[name].chunk.js"
+        chunkFilename: "[name].chunk.js",
+        libraryTarget: 'umd'
     },
 
     resolve: {

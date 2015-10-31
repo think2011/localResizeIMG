@@ -1,2 +1,1705 @@
-!function(e,t){if("object"==typeof exports&&"object"==typeof module)module.exports=t();else if("function"==typeof define&&define.amd)define([],t);else{var n=t();for(var r in n)("object"==typeof exports?exports:e)[r]=n[r]}}(this,function(){return function(e){function t(n){if(r[n])return r[n].exports;var i=r[n]={exports:{},id:n,loaded:!1};return e[n].call(i.exports,i,i.exports,t),i.loaded=!0,i.exports}var n=window.webpackJsonp;window.webpackJsonp=function(r,o){for(var a,s,u=0,c=[];u<r.length;u++)s=r[u],i[s]&&c.push.apply(c,i[s]),i[s]=0;for(a in o)e[a]=o[a];for(n&&n(r,o);c.length;)c.shift().call(null,t)};var r={},i={0:0};return t.e=function(e,n){if(0===i[e])return n.call(null,t);if(void 0!==i[e])i[e].push(n);else{i[e]=[n];var r=document.getElementsByTagName("head")[0],o=document.createElement("script");o.type="text/javascript",o.charset="utf-8",o.async=!0,o.src=t.p+""+({}[e]||e)+".chunk.js",r.appendChild(o)}},t.m=e,t.c=r,t.p="",t(0)}([function(e,t,n){function r(e,t){var n=this;if(!e)throw new Error("没有收到图片，可能的解决方案：https://github.com/think2011/localResizeIMG/issues/7");t=t||{},n.defaults={width:null,height:null,fieldName:"file",quality:.7},n.file=e;for(var r in t)t.hasOwnProperty(r)&&(n.defaults[r]=t[r]);return this.init()}function i(e){var t=null;return t=e?[].filter.call(document.scripts,function(t){return-1!==t.src.indexOf(e)})[0]:document.scripts[document.scripts.length-1],t?t.src.substr(0,t.src.lastIndexOf("/")):null}function o(e){var t;t=e.split(",")[0].indexOf("base64")>=0?atob(e.split(",")[1]):unescape(e.split(",")[1]);for(var n=e.split(",")[0].split(":")[1].split(";")[0],r=new Uint8Array(t.length),i=0;i<t.length;i++)r[i]=t.charCodeAt(i);return new Blob([r],{type:n})}n.p=i("lrz")+"/",window.URL=window.URL||window.webkitURL;var a=n(1),s=n(4),u=function(e){var t=/OS (\d)_.* like Mac OS X/g.exec(e),n=/Android (\d.*?);/g.exec(e)||/Android\/(\d.*?) /g.exec(e);return{oldIOS:t?+t.pop()<8:!1,oldAndroid:n?+n.pop().substr(0,3)<4.5:!1,iOS:/\(i[^;]+;( U;)? CPU.+Mac OS X/.test(e),android:/Android/g.test(e),mQQBrowser:/MQQBrowser/g.test(e)}}(navigator.userAgent);r.prototype.init=function(){var e=this,t=e.file,n=new Image,r=document.createElement("canvas"),i="string"==typeof t?t:URL.createObjectURL(t);if(e.img=n,e.blob=i,e.canvas=r,!document.createElement("canvas").getContext)throw new Error("浏览器不支持canvas");return new a(function(t,r){n.onerror=function(){throw new Error("加载图片文件失败")},n.onload=function(){e._getBase64().then(function(e){return e.length<10&&r("生成base64失败"),e}).then(function(n){var r=new FormData,i=o(n);"object"==typeof e.file&&n.length>e.file.size&&(i=e.file),r.append(e.defaults.fieldName,i),t({formData:r,fileLen:i.size,base64:n,origin:e.file});for(var a in e)e.hasOwnProperty(a)&&(e[a]=null);URL.revokeObjectURL(e.blob)})},n.crossOrigin="*",n.src=i})},r.prototype._getBase64=function(){var e=this,t=e.img,n=e.file,r=e.canvas;return new a(function(i){try{s.getData("object"==typeof n?n:t,function(){e.orientation=s.getTag(this,"Orientation"),e.resize=e._getResize(),e.ctx=r.getContext("2d"),r.width=e.resize.width,r.height=e.resize.height,e.ctx.fillStyle="#fff",e.ctx.fillRect(0,0,r.width,r.height),u.oldIOS?e._createBase64ForOldIOS().then(i):e._createBase64().then(i)})}catch(o){throw new Error(o)}})},r.prototype._createBase64ForOldIOS=function(){var e=this,t=e.img,r=e.canvas,i=e.defaults,o=e.orientation;return new a(function(e){n.e(1,function(n){var a=[n(5)];(function(n){var a=new n(t);"5678".indexOf(o)>-1?a.render(r,{width:r.height,height:r.width,orientation:o}):a.render(r,{width:r.width,height:r.height,orientation:o}),e(r.toDataURL("image/jpeg",i.quality))}).apply(null,a)})})},r.prototype._createBase64=function(){var e=this,t=e.resize,r=e.img,i=e.canvas,o=e.ctx,s=e.defaults,c=e.orientation;switch(c){case 3:o.rotate(180*Math.PI/180),o.drawImage(r,-t.width,-t.height,t.width,t.height);break;case 6:o.rotate(90*Math.PI/180),o.drawImage(r,0,-t.width,t.height,t.width);break;case 8:o.rotate(270*Math.PI/180),o.drawImage(r,-t.height,0,t.height,t.width);break;case 2:o.translate(t.width,0),o.scale(-1,1),o.drawImage(r,0,0,t.width,t.height);break;case 4:o.translate(t.width,0),o.scale(-1,1),o.rotate(180*Math.PI/180),o.drawImage(r,-t.width,-t.height,t.width,t.height);break;case 5:o.translate(t.width,0),o.scale(-1,1),o.rotate(90*Math.PI/180),o.drawImage(r,0,-t.width,t.height,t.width);break;case 7:o.translate(t.width,0),o.scale(-1,1),o.rotate(270*Math.PI/180),o.drawImage(r,-t.height,0,t.height,t.width);break;default:o.drawImage(r,0,0,t.width,t.height)}return new a(function(e){u.oldAndroid||u.mQQBrowser||!navigator.userAgent?n.e(2,function(t){var n=[t(6)];(function(t){var n=new t,r=o.getImageData(0,0,i.width,i.height);e(n.encode(r,100*s.quality))}).apply(null,n)}):e(i.toDataURL("image/jpeg",s.quality))})},r.prototype._getResize=function(){var e=this,t=e.img,n=e.defaults,r=n.width,i=n.height,o=(e.orientation,{width:t.width,height:t.height});if(o.width<r||o.height<i)return o;var a=o.width/o.height;for(r&&i?a>=r/i?o.width>r&&(o.width=r,o.height=Math.ceil(r/a)):o.height>i&&(o.height=i,o.width=Math.ceil(i*a)):r?r<o.width&&(o.width=r,o.height=Math.ceil(r/a)):i&&i<o.height&&(o.width=Math.ceil(i*a),o.height=i);o.width>=3264||o.height>=2448;)o.width*=.8,o.height*=.8;return o},window.lrz=function(e,t){return new r(e,t)},window.lrz.version="4.3.12",e.exports=window.lrz},function(e,t,n){(function(t){!function(n){function r(e,t){return function(){e.apply(t,arguments)}}function i(e){if("object"!=typeof this)throw new TypeError("Promises must be constructed via new");if("function"!=typeof e)throw new TypeError("not a function");this._state=null,this._value=null,this._deferreds=[],l(e,r(a,this),r(s,this))}function o(e){var t=this;return null===this._state?void this._deferreds.push(e):void f(function(){var n=t._state?e.onFulfilled:e.onRejected;if(null===n)return void(t._state?e.resolve:e.reject)(t._value);var r;try{r=n(t._value)}catch(i){return void e.reject(i)}e.resolve(r)})}function a(e){try{if(e===this)throw new TypeError("A promise cannot be resolved with itself.");if(e&&("object"==typeof e||"function"==typeof e)){var t=e.then;if("function"==typeof t)return void l(r(t,e),r(a,this),r(s,this))}this._state=!0,this._value=e,u.call(this)}catch(n){s.call(this,n)}}function s(e){this._state=!1,this._value=e,u.call(this)}function u(){for(var e=0,t=this._deferreds.length;t>e;e++)o.call(this,this._deferreds[e]);this._deferreds=null}function c(e,t,n,r){this.onFulfilled="function"==typeof e?e:null,this.onRejected="function"==typeof t?t:null,this.resolve=n,this.reject=r}function l(e,t,n){var r=!1;try{e(function(e){r||(r=!0,t(e))},function(e){r||(r=!0,n(e))})}catch(i){if(r)return;r=!0,n(i)}}var f="function"==typeof t&&t||function(e){setTimeout(e,1)},d=Array.isArray||function(e){return"[object Array]"===Object.prototype.toString.call(e)};i.prototype["catch"]=function(e){return this.then(null,e)},i.prototype.then=function(e,t){var n=this;return new i(function(r,i){o.call(n,new c(e,t,r,i))})},i.all=function(){var e=Array.prototype.slice.call(1===arguments.length&&d(arguments[0])?arguments[0]:arguments);return new i(function(t,n){function r(o,a){try{if(a&&("object"==typeof a||"function"==typeof a)){var s=a.then;if("function"==typeof s)return void s.call(a,function(e){r(o,e)},n)}e[o]=a,0===--i&&t(e)}catch(u){n(u)}}if(0===e.length)return t([]);for(var i=e.length,o=0;o<e.length;o++)r(o,e[o])})},i.resolve=function(e){return e&&"object"==typeof e&&e.constructor===i?e:new i(function(t){t(e)})},i.reject=function(e){return new i(function(t,n){n(e)})},i.race=function(e){return new i(function(t,n){for(var r=0,i=e.length;i>r;r++)e[r].then(t,n)})},i._setImmediateFn=function(e){f=e},i.prototype.always=function(e){var t=this.constructor;return this.then(function(n){return t.resolve(e()).then(function(){return n})},function(n){return t.resolve(e()).then(function(){throw n})})},"undefined"!=typeof e&&e.exports?e.exports=i:n.Promise||(n.Promise=i)}(this)}).call(t,n(2).setImmediate)},function(e,t,n){(function(e,r){function i(e,t){this._id=e,this._clearFn=t}var o=n(3).nextTick,a=Function.prototype.apply,s=Array.prototype.slice,u={},c=0;t.setTimeout=function(){return new i(a.call(setTimeout,window,arguments),clearTimeout)},t.setInterval=function(){return new i(a.call(setInterval,window,arguments),clearInterval)},t.clearTimeout=t.clearInterval=function(e){e.close()},i.prototype.unref=i.prototype.ref=function(){},i.prototype.close=function(){this._clearFn.call(window,this._id)},t.enroll=function(e,t){clearTimeout(e._idleTimeoutId),e._idleTimeout=t},t.unenroll=function(e){clearTimeout(e._idleTimeoutId),e._idleTimeout=-1},t._unrefActive=t.active=function(e){clearTimeout(e._idleTimeoutId);var t=e._idleTimeout;t>=0&&(e._idleTimeoutId=setTimeout(function(){e._onTimeout&&e._onTimeout()},t))},t.setImmediate="function"==typeof e?e:function(e){var n=c++,r=arguments.length<2?!1:s.call(arguments,1);return u[n]=!0,o(function(){u[n]&&(r?e.apply(null,r):e.call(null),t.clearImmediate(n))}),n},t.clearImmediate="function"==typeof r?r:function(e){delete u[e]}}).call(t,n(2).setImmediate,n(2).clearImmediate)},function(e,t){function n(){c=!1,a.length?u=a.concat(u):l=-1,u.length&&r()}function r(){if(!c){var e=setTimeout(n);c=!0;for(var t=u.length;t;){for(a=u,u=[];++l<t;)a&&a[l].run();l=-1,t=u.length}a=null,c=!1,clearTimeout(e)}}function i(e,t){this.fun=e,this.array=t}function o(){}var a,s=e.exports={},u=[],c=!1,l=-1;s.nextTick=function(e){var t=new Array(arguments.length-1);if(arguments.length>1)for(var n=1;n<arguments.length;n++)t[n-1]=arguments[n];u.push(new i(e,t)),1!==u.length||c||setTimeout(r,0)},i.prototype.run=function(){this.fun.apply(null,this.array)},s.title="browser",s.browser=!0,s.env={},s.argv=[],s.version="",s.versions={},s.on=o,s.addListener=o,s.once=o,s.off=o,s.removeListener=o,s.removeAllListeners=o,s.emit=o,s.binding=function(e){throw new Error("process.binding is not supported")},s.cwd=function(){return"/"},s.chdir=function(e){throw new Error("process.chdir is not supported")},s.umask=function(){return 0}},function(e,t,n){var r,i;(function(){function n(e){return!!e.exifdata}function o(e,t){t=t||e.match(/^data\:([^\;]+)\;base64,/im)[1]||"",e=e.replace(/^data\:([^\;]+)\;base64,/gim,"");for(var n=atob(e),r=n.length,i=new ArrayBuffer(r),o=new Uint8Array(i),a=0;r>a;a++)o[a]=n.charCodeAt(a);return i}function a(e,t){var n=new XMLHttpRequest;n.open("GET",e,!0),n.responseType="blob",n.onload=function(e){(200==this.status||0===this.status)&&t(this.response)},n.send()}function s(e,t){function n(n){var r=u(n),i=c(n);e.exifdata=r||{},e.iptcdata=i||{},t&&t.call(e)}if(e.src)if(/^data\:/i.test(e.src)){var r=o(e.src);n(r)}else if(/^blob\:/i.test(e.src)){var i=new FileReader;i.onload=function(e){n(e.target.result)},a(e.src,function(e){i.readAsArrayBuffer(e)})}else{var s=new XMLHttpRequest;s.onload=function(){200==this.status||0===this.status?n(s.response):t(new Error("Could not load image")),s=null},s.open("GET",e.src,!0),s.responseType="arraybuffer",s.send(null)}else if(window.FileReader&&(e instanceof window.Blob||e instanceof window.File)){var i=new FileReader;i.onload=function(e){p&&console.log("Got file of length "+e.target.result.byteLength),n(e.target.result)},i.readAsArrayBuffer(e)}}function u(e){var t=new DataView(e);if(p&&console.log("Got file of length "+e.byteLength),255!=t.getUint8(0)||216!=t.getUint8(1))return p&&console.log("Not a valid JPEG"),!1;for(var n,r=2,i=e.byteLength;i>r;){if(255!=t.getUint8(r))return p&&console.log("Not a valid marker at offset "+r+", found: "+t.getUint8(r)),!1;if(n=t.getUint8(r+1),p&&console.log(n),225==n)return p&&console.log("Found 0xFFE1 marker"),g(t,r+4,t.getUint16(r+2)-2);r+=2+t.getUint16(r+2)}}function c(e){var t=new DataView(e);if(p&&console.log("Got file of length "+e.byteLength),255!=t.getUint8(0)||216!=t.getUint8(1))return p&&console.log("Not a valid JPEG"),!1;for(var n=2,r=e.byteLength,i=function(e,t){return 56===e.getUint8(t)&&66===e.getUint8(t+1)&&73===e.getUint8(t+2)&&77===e.getUint8(t+3)&&4===e.getUint8(t+4)&&4===e.getUint8(t+5)};r>n;){if(i(t,n)){var o=t.getUint8(n+7);o%2!==0&&(o+=1),0===o&&(o=4);var a=n+8+o,s=t.getUint16(n+6+o);return l(e,a,s)}n++}}function l(e,t,n){for(var r,i,o,a,s,u=new DataView(e),c={},l=t;t+n>l;)28===u.getUint8(l)&&2===u.getUint8(l+1)&&(a=u.getUint8(l+2),a in P&&(o=u.getInt16(l+3),s=o+5,i=P[a],r=h(u,l+5,o),c.hasOwnProperty(i)?c[i]instanceof Array?c[i].push(r):c[i]=[c[i],r]:c[i]=r)),l++;return c}function f(e,t,n,r,i){var o,a,s,u=e.getUint16(n,!i),c={};for(s=0;u>s;s++)o=n+12*s+2,a=r[e.getUint16(o,!i)],!a&&p&&console.log("Unknown tag: "+e.getUint16(o,!i)),c[a]=d(e,o,t,n,i);return c}function d(e,t,n,r,i){var o,a,s,u,c,l,f=e.getUint16(t+2,!i),d=e.getUint32(t+4,!i),g=e.getUint32(t+8,!i)+n;switch(f){case 1:case 7:if(1==d)return e.getUint8(t+8,!i);for(o=d>4?g:t+8,a=[],u=0;d>u;u++)a[u]=e.getUint8(o+u);return a;case 2:return o=d>4?g:t+8,h(e,o,d-1);case 3:if(1==d)return e.getUint16(t+8,!i);for(o=d>2?g:t+8,a=[],u=0;d>u;u++)a[u]=e.getUint16(o+2*u,!i);return a;case 4:if(1==d)return e.getUint32(t+8,!i);for(a=[],u=0;d>u;u++)a[u]=e.getUint32(g+4*u,!i);return a;case 5:if(1==d)return c=e.getUint32(g,!i),l=e.getUint32(g+4,!i),s=new Number(c/l),s.numerator=c,s.denominator=l,s;for(a=[],u=0;d>u;u++)c=e.getUint32(g+8*u,!i),l=e.getUint32(g+4+8*u,!i),a[u]=new Number(c/l),a[u].numerator=c,a[u].denominator=l;return a;case 9:if(1==d)return e.getInt32(t+8,!i);for(a=[],u=0;d>u;u++)a[u]=e.getInt32(g+4*u,!i);return a;case 10:if(1==d)return e.getInt32(g,!i)/e.getInt32(g+4,!i);for(a=[],u=0;d>u;u++)a[u]=e.getInt32(g+8*u,!i)/e.getInt32(g+4+8*u,!i);return a}}function h(e,t,n){var r,i="";for(r=t;t+n>r;r++)i+=String.fromCharCode(e.getUint8(r));return i}function g(e,t){if("Exif"!=h(e,t,4))return p&&console.log("Not valid EXIF data! "+h(e,t,4)),!1;var n,r,i,o,a,s=t+6;if(18761==e.getUint16(s))n=!1;else{if(19789!=e.getUint16(s))return p&&console.log("Not valid TIFF data! (no 0x4949 or 0x4D4D)"),!1;n=!0}if(42!=e.getUint16(s+2,!n))return p&&console.log("Not valid TIFF data! (no 0x002A)"),!1;var u=e.getUint32(s+4,!n);if(8>u)return p&&console.log("Not valid TIFF data! (First offset less than 8)",e.getUint32(s+4,!n)),!1;if(r=f(e,s,s+u,y,n),r.ExifIFDPointer){o=f(e,s,s+r.ExifIFDPointer,w,n);for(i in o){switch(i){case"LightSource":case"Flash":case"MeteringMode":case"ExposureProgram":case"SensingMethod":case"SceneCaptureType":case"SceneType":case"CustomRendered":case"WhiteBalance":case"GainControl":case"Contrast":case"Saturation":case"Sharpness":case"SubjectDistanceRange":case"FileSource":o[i]=S[i][o[i]];break;case"ExifVersion":case"FlashpixVersion":o[i]=String.fromCharCode(o[i][0],o[i][1],o[i][2],o[i][3]);break;case"ComponentsConfiguration":o[i]=S.Components[o[i][0]]+S.Components[o[i][1]]+S.Components[o[i][2]]+S.Components[o[i][3]]}r[i]=o[i]}}if(r.GPSInfoIFDPointer){a=f(e,s,s+r.GPSInfoIFDPointer,v,n);for(i in a){switch(i){case"GPSVersionID":a[i]=a[i][0]+"."+a[i][1]+"."+a[i][2]+"."+a[i][3]}r[i]=a[i]}}return r}var p=!1,m=function(e){return e instanceof m?e:this instanceof m?void(this.EXIFwrapped=e):new m(e)};"undefined"!=typeof e&&e.exports&&(t=e.exports=m),t.EXIF=m;var w=m.Tags={36864:"ExifVersion",40960:"FlashpixVersion",40961:"ColorSpace",40962:"PixelXDimension",40963:"PixelYDimension",37121:"ComponentsConfiguration",37122:"CompressedBitsPerPixel",37500:"MakerNote",37510:"UserComment",40964:"RelatedSoundFile",36867:"DateTimeOriginal",36868:"DateTimeDigitized",37520:"SubsecTime",37521:"SubsecTimeOriginal",37522:"SubsecTimeDigitized",33434:"ExposureTime",33437:"FNumber",34850:"ExposureProgram",34852:"SpectralSensitivity",34855:"ISOSpeedRatings",34856:"OECF",37377:"ShutterSpeedValue",37378:"ApertureValue",37379:"BrightnessValue",37380:"ExposureBias",37381:"MaxApertureValue",37382:"SubjectDistance",37383:"MeteringMode",37384:"LightSource",37385:"Flash",37396:"SubjectArea",37386:"FocalLength",41483:"FlashEnergy",41484:"SpatialFrequencyResponse",41486:"FocalPlaneXResolution",41487:"FocalPlaneYResolution",41488:"FocalPlaneResolutionUnit",41492:"SubjectLocation",41493:"ExposureIndex",41495:"SensingMethod",41728:"FileSource",41729:"SceneType",41730:"CFAPattern",41985:"CustomRendered",41986:"ExposureMode",41987:"WhiteBalance",41988:"DigitalZoomRation",41989:"FocalLengthIn35mmFilm",41990:"SceneCaptureType",41991:"GainControl",41992:"Contrast",41993:"Saturation",41994:"Sharpness",41995:"DeviceSettingDescription",41996:"SubjectDistanceRange",40965:"InteroperabilityIFDPointer",42016:"ImageUniqueID"},y=m.TiffTags={256:"ImageWidth",257:"ImageHeight",34665:"ExifIFDPointer",34853:"GPSInfoIFDPointer",40965:"InteroperabilityIFDPointer",258:"BitsPerSample",259:"Compression",262:"PhotometricInterpretation",274:"Orientation",277:"SamplesPerPixel",284:"PlanarConfiguration",530:"YCbCrSubSampling",531:"YCbCrPositioning",282:"XResolution",283:"YResolution",296:"ResolutionUnit",273:"StripOffsets",278:"RowsPerStrip",279:"StripByteCounts",513:"JPEGInterchangeFormat",514:"JPEGInterchangeFormatLength",301:"TransferFunction",318:"WhitePoint",319:"PrimaryChromaticities",529:"YCbCrCoefficients",532:"ReferenceBlackWhite",306:"DateTime",270:"ImageDescription",271:"Make",272:"Model",305:"Software",315:"Artist",33432:"Copyright"},v=m.GPSTags={0:"GPSVersionID",1:"GPSLatitudeRef",2:"GPSLatitude",3:"GPSLongitudeRef",4:"GPSLongitude",5:"GPSAltitudeRef",6:"GPSAltitude",7:"GPSTimeStamp",8:"GPSSatellites",9:"GPSStatus",10:"GPSMeasureMode",11:"GPSDOP",12:"GPSSpeedRef",13:"GPSSpeed",14:"GPSTrackRef",15:"GPSTrack",16:"GPSImgDirectionRef",17:"GPSImgDirection",18:"GPSMapDatum",19:"GPSDestLatitudeRef",20:"GPSDestLatitude",21:"GPSDestLongitudeRef",22:"GPSDestLongitude",23:"GPSDestBearingRef",24:"GPSDestBearing",25:"GPSDestDistanceRef",26:"GPSDestDistance",27:"GPSProcessingMethod",28:"GPSAreaInformation",29:"GPSDateStamp",30:"GPSDifferential"},S=m.StringValues={ExposureProgram:{0:"Not defined",1:"Manual",2:"Normal program",3:"Aperture priority",4:"Shutter priority",5:"Creative program",6:"Action program",7:"Portrait mode",8:"Landscape mode"},MeteringMode:{0:"Unknown",1:"Average",2:"CenterWeightedAverage",3:"Spot",4:"MultiSpot",5:"Pattern",6:"Partial",255:"Other"},LightSource:{0:"Unknown",1:"Daylight",2:"Fluorescent",3:"Tungsten (incandescent light)",4:"Flash",9:"Fine weather",10:"Cloudy weather",11:"Shade",12:"Daylight fluorescent (D 5700 - 7100K)",13:"Day white fluorescent (N 4600 - 5400K)",14:"Cool white fluorescent (W 3900 - 4500K)",15:"White fluorescent (WW 3200 - 3700K)",17:"Standard light A",18:"Standard light B",19:"Standard light C",20:"D55",21:"D65",22:"D75",23:"D50",24:"ISO studio tungsten",255:"Other"},Flash:{0:"Flash did not fire",1:"Flash fired",5:"Strobe return light not detected",7:"Strobe return light detected",9:"Flash fired, compulsory flash mode",13:"Flash fired, compulsory flash mode, return light not detected",15:"Flash fired, compulsory flash mode, return light detected",16:"Flash did not fire, compulsory flash mode",24:"Flash did not fire, auto mode",25:"Flash fired, auto mode",29:"Flash fired, auto mode, return light not detected",31:"Flash fired, auto mode, return light detected",32:"No flash function",65:"Flash fired, red-eye reduction mode",69:"Flash fired, red-eye reduction mode, return light not detected",71:"Flash fired, red-eye reduction mode, return light detected",73:"Flash fired, compulsory flash mode, red-eye reduction mode",77:"Flash fired, compulsory flash mode, red-eye reduction mode, return light not detected",79:"Flash fired, compulsory flash mode, red-eye reduction mode, return light detected",89:"Flash fired, auto mode, red-eye reduction mode",93:"Flash fired, auto mode, return light not detected, red-eye reduction mode",95:"Flash fired, auto mode, return light detected, red-eye reduction mode"},SensingMethod:{1:"Not defined",2:"One-chip color area sensor",3:"Two-chip color area sensor",4:"Three-chip color area sensor",5:"Color sequential area sensor",7:"Trilinear sensor",8:"Color sequential linear sensor"},SceneCaptureType:{0:"Standard",1:"Landscape",2:"Portrait",3:"Night scene"},SceneType:{1:"Directly photographed"},CustomRendered:{0:"Normal process",1:"Custom process"},WhiteBalance:{0:"Auto white balance",1:"Manual white balance"},GainControl:{0:"None",1:"Low gain up",2:"High gain up",3:"Low gain down",4:"High gain down"},Contrast:{0:"Normal",1:"Soft",2:"Hard"},Saturation:{0:"Normal",1:"Low saturation",2:"High saturation"},Sharpness:{0:"Normal",1:"Soft",2:"Hard"},SubjectDistanceRange:{0:"Unknown",1:"Macro",2:"Close view",3:"Distant view"},FileSource:{3:"DSC"},Components:{0:"",1:"Y",2:"Cb",3:"Cr",4:"R",5:"G",6:"B"}},P={120:"caption",110:"credit",25:"keywords",55:"dateCreated",80:"byline",85:"bylineTitle",122:"captionWriter",105:"headline",116:"copyright",15:"category"};m.getData=function(e,t){return(e instanceof Image||e instanceof HTMLImageElement)&&!e.complete?!1:(n(e)?t&&t.call(e):s(e,t),!0)},m.getTag=function(e,t){return n(e)?e.exifdata[t]:void 0},m.getAllTags=function(e){if(!n(e))return{};var t,r=e.exifdata,i={};for(t in r)r.hasOwnProperty(t)&&(i[t]=r[t]);return i},m.pretty=function(e){if(!n(e))return"";var t,r=e.exifdata,i="";for(t in r)r.hasOwnProperty(t)&&(i+="object"==typeof r[t]?r[t]instanceof Number?t+" : "+r[t]+" ["+r[t].numerator+"/"+r[t].denominator+"]\r\n":t+" : ["+r[t].length+" values]\r\n":t+" : "+r[t]+"\r\n");return i},m.readFromBinaryFile=function(e){return u(e)},r=[],i=function(){return m}.apply(t,r),!(void 0!==i&&(e.exports=i))}).call(this)}])});
-//# sourceMappingURL=lrz.bundle.js.map
+(function webpackUniversalModuleDefinition(root, factory) {
+	if(typeof exports === 'object' && typeof module === 'object')
+		module.exports = factory();
+	else if(typeof define === 'function' && define.amd)
+		define([], factory);
+	else {
+		var a = factory();
+		for(var i in a) (typeof exports === 'object' ? exports : root)[i] = a[i];
+	}
+})(this, function() {
+return /******/ (function(modules) { // webpackBootstrap
+/******/ 	// install a JSONP callback for chunk loading
+/******/ 	var parentJsonpFunction = window["webpackJsonp"];
+/******/ 	window["webpackJsonp"] = function webpackJsonpCallback(chunkIds, moreModules) {
+/******/ 		// add "moreModules" to the modules object,
+/******/ 		// then flag all "chunkIds" as loaded and fire callback
+/******/ 		var moduleId, chunkId, i = 0, callbacks = [];
+/******/ 		for(;i < chunkIds.length; i++) {
+/******/ 			chunkId = chunkIds[i];
+/******/ 			if(installedChunks[chunkId])
+/******/ 				callbacks.push.apply(callbacks, installedChunks[chunkId]);
+/******/ 			installedChunks[chunkId] = 0;
+/******/ 		}
+/******/ 		for(moduleId in moreModules) {
+/******/ 			modules[moduleId] = moreModules[moduleId];
+/******/ 		}
+/******/ 		if(parentJsonpFunction) parentJsonpFunction(chunkIds, moreModules);
+/******/ 		while(callbacks.length)
+/******/ 			callbacks.shift().call(null, __webpack_require__);
+
+/******/ 	};
+
+/******/ 	// The module cache
+/******/ 	var installedModules = {};
+
+/******/ 	// object to store loaded and loading chunks
+/******/ 	// "0" means "already loaded"
+/******/ 	// Array means "loading", array contains callbacks
+/******/ 	var installedChunks = {
+/******/ 		0:0
+/******/ 	};
+
+/******/ 	// The require function
+/******/ 	function __webpack_require__(moduleId) {
+
+/******/ 		// Check if module is in cache
+/******/ 		if(installedModules[moduleId])
+/******/ 			return installedModules[moduleId].exports;
+
+/******/ 		// Create a new module (and put it into the cache)
+/******/ 		var module = installedModules[moduleId] = {
+/******/ 			exports: {},
+/******/ 			id: moduleId,
+/******/ 			loaded: false
+/******/ 		};
+
+/******/ 		// Execute the module function
+/******/ 		modules[moduleId].call(module.exports, module, module.exports, __webpack_require__);
+
+/******/ 		// Flag the module as loaded
+/******/ 		module.loaded = true;
+
+/******/ 		// Return the exports of the module
+/******/ 		return module.exports;
+/******/ 	}
+
+/******/ 	// This file contains only the entry chunk.
+/******/ 	// The chunk loading function for additional chunks
+/******/ 	__webpack_require__.e = function requireEnsure(chunkId, callback) {
+/******/ 		// "0" is the signal for "already loaded"
+/******/ 		if(installedChunks[chunkId] === 0)
+/******/ 			return callback.call(null, __webpack_require__);
+
+/******/ 		// an array means "currently loading".
+/******/ 		if(installedChunks[chunkId] !== undefined) {
+/******/ 			installedChunks[chunkId].push(callback);
+/******/ 		} else {
+/******/ 			// start chunk loading
+/******/ 			installedChunks[chunkId] = [callback];
+/******/ 			var head = document.getElementsByTagName('head')[0];
+/******/ 			var script = document.createElement('script');
+/******/ 			script.type = 'text/javascript';
+/******/ 			script.charset = 'utf-8';
+/******/ 			script.async = true;
+
+/******/ 			script.src = __webpack_require__.p + "" + ({}[chunkId]||chunkId) + ".chunk.js";
+/******/ 			head.appendChild(script);
+/******/ 		}
+/******/ 	};
+
+/******/ 	// expose the modules object (__webpack_modules__)
+/******/ 	__webpack_require__.m = modules;
+
+/******/ 	// expose the module cache
+/******/ 	__webpack_require__.c = installedModules;
+
+/******/ 	// __webpack_public_path__
+/******/ 	__webpack_require__.p = "";
+
+/******/ 	// Load entry module and return exports
+/******/ 	return __webpack_require__(0);
+/******/ })
+/************************************************************************/
+/******/ ([
+/* 0 */
+/***/ function(module, exports, __webpack_require__) {
+
+	// 保证按需加载的文件路径正确
+	__webpack_require__.p = getJsDir('lrz') + '/';
+	window.URL              = window.URL || window.webkitURL;
+
+	var Promise = __webpack_require__(1),
+	    exif    = __webpack_require__(4);
+
+
+	var UA = (function (userAgent) {
+	    var ISOldIOS     = /OS (\d)_.* like Mac OS X/g.exec(userAgent),
+	        isOldAndroid = /Android (\d.*?);/g.exec(userAgent) || /Android\/(\d.*?) /g.exec(userAgent);
+
+	    // 判断设备是否是IOS7以下
+	    // 判断设备是否是android4.5以下
+	    // 判断是否iOS
+	    // 判断是否android
+	    // 判断是否QQ浏览器
+	    return {
+	        oldIOS    : ISOldIOS ? +ISOldIOS.pop() < 8 : false,
+	        oldAndroid: isOldAndroid ? +isOldAndroid.pop().substr(0, 3) < 4.5 : false,
+	        iOS       : /\(i[^;]+;( U;)? CPU.+Mac OS X/.test(userAgent),
+	        android   : /Android/g.test(userAgent),
+	        mQQBrowser: /MQQBrowser/g.test(userAgent)
+	    }
+	})(navigator.userAgent);
+
+	function Lrz (file, opts) {
+	    var that = this;
+
+	    if (!file) throw new Error('没有收到图片，可能的解决方案：https://github.com/think2011/localResizeIMG/issues/7');
+
+	    opts = opts || {};
+
+	    that.defaults = {
+	        width    : null,
+	        height   : null,
+	        fieldName: 'file',
+	        quality  : 0.7
+	    };
+
+	    that.file = file;
+
+	    for (var p in opts) {
+	        if (!opts.hasOwnProperty(p)) continue;
+	        that.defaults[p] = opts[p];
+	    }
+
+	    return this.init();
+	}
+
+	Lrz.prototype.init = function () {
+	    var that   = this,
+	        file   = that.file,
+	        img    = new Image(),
+	        canvas = document.createElement('canvas'),
+	        blob   = (typeof file === 'string') ? file : URL.createObjectURL(file);
+
+	    that.img    = img;
+	    that.blob   = blob;
+	    that.canvas = canvas;
+
+	    if (!document.createElement('canvas').getContext) {
+	        throw new Error('浏览器不支持canvas');
+	    }
+
+	    return new Promise(function (resolve, reject) {
+	        img.onerror = function () {
+	            throw new Error('加载图片文件失败');
+	        };
+
+	        img.onload = function () {
+	            that._getBase64()
+	                .then(function (base64) {
+	                    if (base64.length < 10) reject('生成base64失败');
+
+	                    return base64;
+	                })
+	                .then(function (base64) {
+	                    var formData = new FormData(),
+	                        file     = dataURItoBlob(base64);
+
+	                    // 压缩文件太大就采用源文件
+	                    if (typeof that.file === 'object' && base64.length > that.file.size) {
+	                        file = that.file;
+	                    }
+
+	                    formData.append(that.defaults.fieldName, file);
+
+	                    resolve({
+	                        formData: formData,
+	                        fileLen : file.size,
+	                        base64  : base64,
+	                        origin  : that.file
+	                    });
+
+	                    // 释放内存
+	                    for (var p in that) {
+	                        if (!that.hasOwnProperty(p)) continue;
+
+	                        that[p] = null;
+	                    }
+	                    URL.revokeObjectURL(that.blob);
+	                });
+	        };
+
+	        img.crossOrigin = "*";
+
+	        img.src = blob;
+	    });
+	};
+
+	Lrz.prototype._getBase64 = function () {
+	    var that   = this,
+	        img    = that.img,
+	        file   = that.file,
+	        canvas = that.canvas;
+
+	    return new Promise(function (resolve) {
+	        try {
+	            // 传入blob在android4.3以下有bug
+	            exif.getData(typeof file === 'object' ? file : img, function () {
+	                that.orientation = exif.getTag(this, "Orientation");
+
+	                that.resize = that._getResize();
+	                that.ctx    = canvas.getContext('2d');
+
+	                canvas.width  = that.resize.width;
+	                canvas.height = that.resize.height;
+
+	                // 设置为白色背景，jpg是不支持透明的，所以会被默认为canvas默认的黑色背景。
+	                that.ctx.fillStyle = '#fff';
+	                that.ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+	                // 根据设备对应处理方式
+	                if (UA.oldIOS) {
+	                    that._createBase64ForOldIOS().then(resolve);
+	                }
+	                else {
+	                    that._createBase64().then(resolve);
+	                }
+	            });
+	        } catch (err) {
+	            // 这样能解决低内存设备闪退的问题吗？
+	            throw new Error(err);
+	        }
+	    });
+	};
+
+
+	Lrz.prototype._createBase64ForOldIOS = function () {
+	    var that        = this,
+	        img         = that.img,
+	        canvas      = that.canvas,
+	        defaults    = that.defaults,
+	        orientation = that.orientation;
+
+	    return new Promise(function (resolve) {
+	        __webpack_require__.e/* require */(1, function(__webpack_require__) { var __WEBPACK_AMD_REQUIRE_ARRAY__ = [__webpack_require__(5)]; (function (MegaPixImage) {
+	            var mpImg = new MegaPixImage(img);
+
+	            if ("5678".indexOf(orientation) > -1) {
+	                mpImg.render(canvas, {
+	                    width      : canvas.height,
+	                    height     : canvas.width,
+	                    orientation: orientation
+	                });
+	            } else {
+	                mpImg.render(canvas, {
+	                    width      : canvas.width,
+	                    height     : canvas.height,
+	                    orientation: orientation
+	                });
+	            }
+
+	            resolve(canvas.toDataURL('image/jpeg', defaults.quality));
+	        }.apply(null, __WEBPACK_AMD_REQUIRE_ARRAY__));});
+	    });
+	};
+
+	Lrz.prototype._createBase64 = function () {
+	    var that        = this,
+	        resize      = that.resize,
+	        img         = that.img,
+	        canvas      = that.canvas,
+	        ctx         = that.ctx,
+	        defaults    = that.defaults,
+	        orientation = that.orientation;
+
+	    // 调整为正确方向
+	    switch (orientation) {
+	        case 3:
+	            ctx.rotate(180 * Math.PI / 180);
+	            ctx.drawImage(img, -resize.width, -resize.height, resize.width, resize.height);
+	            break;
+	        case 6:
+	            ctx.rotate(90 * Math.PI / 180);
+	            ctx.drawImage(img, 0, -resize.width, resize.height, resize.width);
+	            break;
+	        case 8:
+	            ctx.rotate(270 * Math.PI / 180);
+	            ctx.drawImage(img, -resize.height, 0, resize.height, resize.width);
+	            break;
+
+	        case 2:
+	            ctx.translate(resize.width, 0);
+	            ctx.scale(-1, 1);
+	            ctx.drawImage(img, 0, 0, resize.width, resize.height);
+	            break;
+	        case 4:
+	            ctx.translate(resize.width, 0);
+	            ctx.scale(-1, 1);
+	            ctx.rotate(180 * Math.PI / 180);
+	            ctx.drawImage(img, -resize.width, -resize.height, resize.width, resize.height);
+	            break;
+	        case 5:
+	            ctx.translate(resize.width, 0);
+	            ctx.scale(-1, 1);
+	            ctx.rotate(90 * Math.PI / 180);
+	            ctx.drawImage(img, 0, -resize.width, resize.height, resize.width);
+	            break;
+	        case 7:
+	            ctx.translate(resize.width, 0);
+	            ctx.scale(-1, 1);
+	            ctx.rotate(270 * Math.PI / 180);
+	            ctx.drawImage(img, -resize.height, 0, resize.height, resize.width);
+	            break;
+
+	        default:
+	            ctx.drawImage(img, 0, 0, resize.width, resize.height);
+	    }
+
+	    return new Promise(function (resolve) {
+	        if (UA.oldAndroid || UA.mQQBrowser || !navigator.userAgent) {
+	            __webpack_require__.e/* require */(2, function(__webpack_require__) { var __WEBPACK_AMD_REQUIRE_ARRAY__ = [__webpack_require__(6)]; (function (JPEGEncoder) {
+	                var encoder = new JPEGEncoder(),
+	                    img     = ctx.getImageData(0, 0, canvas.width, canvas.height);
+
+	                resolve(encoder.encode(img, defaults.quality * 100));
+	            }.apply(null, __WEBPACK_AMD_REQUIRE_ARRAY__));})
+	        }
+	        else {
+	            resolve(canvas.toDataURL('image/jpeg', defaults.quality));
+	        }
+	    });
+	};
+
+	Lrz.prototype._getResize = function () {
+	    var that        = this,
+	        img         = that.img,
+	        defaults    = that.defaults,
+	        width       = defaults.width,
+	        height      = defaults.height,
+	        orientation = that.orientation;
+
+	    var ret = {
+	        width : img.width,
+	        height: img.height
+	    };
+
+	    // 如果原图小于设定，采用原图
+	    if (ret.width < width || ret.height < height) {
+	        return ret;
+	    }
+
+	    var scale = ret.width / ret.height;
+
+	    if (width && height) {
+	        if (scale >= width / height) {
+	            if (ret.width > width) {
+	                ret.width  = width;
+	                ret.height = Math.ceil(width / scale);
+	            }
+	        } else {
+	            if (ret.height > height) {
+	                ret.height = height;
+	                ret.width  = Math.ceil(height * scale);
+	            }
+	        }
+	    }
+	    else if (width) {
+	        if (width < ret.width) {
+	            ret.width  = width;
+	            ret.height = Math.ceil(width / scale);
+	        }
+	    }
+	    else if (height) {
+	        if (height < ret.height) {
+	            ret.width  = Math.ceil(height * scale);
+	            ret.height = height;
+	        }
+	    }
+
+	    // 超过这个值base64无法生成，在IOS上
+	    while (ret.width >= 3264 || ret.height >= 2448) {
+	        ret.width *= 0.8;
+	        ret.height *= 0.8;
+	    }
+
+	    return ret;
+	};
+
+	/**
+	 * 获取当前js文件所在路径，必须得在代码顶部执行此函数
+	 * @returns {string}
+	 */
+	function getJsDir (src) {
+	    var script = null;
+
+	    if (src) {
+	        script = [].filter.call(document.scripts, function (v) {
+	            return v.src.indexOf(src) !== -1;
+	        })[0];
+	    } else {
+	        script = document.scripts[document.scripts.length - 1];
+	    }
+
+	    if (!script) return null;
+
+	    return script.src.substr(0, script.src.lastIndexOf('/'));
+	}
+
+
+	/**
+	 * 转换成formdata
+	 * @param dataURI
+	 * @returns {*}
+	 *
+	 * @source http://stackoverflow.com/questions/4998908/convert-data-uri-to-file-then-append-to-formdata
+	 */
+	function dataURItoBlob (dataURI) {
+	    // convert base64/URLEncoded data component to raw binary data held in a string
+	    var byteString;
+	    if (dataURI.split(',')[0].indexOf('base64') >= 0)
+	        byteString = atob(dataURI.split(',')[1]);
+	    else
+	        byteString = unescape(dataURI.split(',')[1]);
+
+	    // separate out the mime component
+	    var mimeString = dataURI.split(',')[0].split(':')[1].split(';')[0];
+
+	    // write the bytes of the string to a typed array
+	    var ia = new Uint8Array(byteString.length);
+	    for (var i = 0; i < byteString.length; i++) {
+	        ia[i] = byteString.charCodeAt(i);
+	    }
+
+	    return new Blob([ia], {type: mimeString});
+	}
+
+	window.lrz = function (file, opts) {
+	    return new Lrz(file, opts);
+	};
+
+	// 版本号来自package.json，构建时自动填充
+	window.lrz.version = '__packageJSON.version__';
+
+	module.exports = window.lrz;
+
+	/**
+	 *
+	 * 　　　┏┓　　　┏┓
+	 * 　　┏┛┻━━━┛┻┓
+	 * 　　┃　　　　　　　┃
+	 * 　　┃　　　━　　　┃
+	 * 　　┃　┳┛　┗┳　┃
+	 * 　　┃　　　　　　　┃
+	 * 　　┃　　　┻　　　┃
+	 * 　　┃　　　　　　　┃
+	 * 　　┗━┓　　　┏━┛Code is far away from bug with the animal protecting
+	 * 　　　　┃　　　┃    神兽保佑,代码无bug
+	 * 　　　　┃　　　┃
+	 * 　　　　┃　　　┗━━━┓
+	 * 　　　　┃　　　　　 ┣┓
+	 * 　　　　┃　　　　 ┏┛
+	 * 　　　　┗┓┓┏━┳┓┏┛
+	 * 　　　　　┃┫┫　┃┫┫
+	 * 　　　　　┗┻┛　┗┻┛
+	 *
+	 */
+
+
+
+
+/***/ },
+/* 1 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/* WEBPACK VAR INJECTION */(function(setImmediate) {(function (root) {
+
+	    // Use polyfill for setImmediate for performance gains
+	    var asap = (typeof setImmediate === 'function' && setImmediate) ||
+	        function (fn) {
+	            setTimeout(fn, 1);
+	        };
+
+	    // Polyfill for Function.prototype.bind
+	    function bind (fn, thisArg) {
+	        return function () {
+	            fn.apply(thisArg, arguments);
+	        }
+	    }
+
+	    var isArray = Array.isArray || function (value) {
+	            return Object.prototype.toString.call(value) === "[object Array]"
+	        };
+
+	    function Promise (fn) {
+	        if (typeof this !== 'object') throw new TypeError('Promises must be constructed via new');
+	        if (typeof fn !== 'function') throw new TypeError('not a function');
+	        this._state     = null;
+	        this._value     = null;
+	        this._deferreds = []
+
+	        doResolve(fn, bind(resolve, this), bind(reject, this))
+	    }
+
+	    function handle (deferred) {
+	        var me = this;
+	        if (this._state === null) {
+	            this._deferreds.push(deferred);
+	            return
+	        }
+	        asap(function () {
+	            var cb = me._state ? deferred.onFulfilled : deferred.onRejected
+	            if (cb === null) {
+	                (me._state ? deferred.resolve : deferred.reject)(me._value);
+	                return;
+	            }
+	            var ret;
+	            try {
+	                ret = cb(me._value);
+	            }
+	            catch (e) {
+	                deferred.reject(e);
+	                return;
+	            }
+	            deferred.resolve(ret);
+	        })
+	    }
+
+	    function resolve (newValue) {
+	        try { //Promise Resolution Procedure: https://github.com/promises-aplus/promises-spec#the-promise-resolution-procedure
+	            if (newValue === this) throw new TypeError('A promise cannot be resolved with itself.');
+	            if (newValue && (typeof newValue === 'object' || typeof newValue === 'function')) {
+	                var then = newValue.then;
+	                if (typeof then === 'function') {
+	                    doResolve(bind(then, newValue), bind(resolve, this), bind(reject, this));
+	                    return;
+	                }
+	            }
+	            this._state = true;
+	            this._value = newValue;
+	            finale.call(this);
+	        } catch (e) {
+	            reject.call(this, e);
+	        }
+	    }
+
+	    function reject (newValue) {
+	        this._state = false;
+	        this._value = newValue;
+	        finale.call(this);
+	    }
+
+	    function finale () {
+	        for (var i = 0, len = this._deferreds.length; i < len; i++) {
+	            handle.call(this, this._deferreds[i]);
+	        }
+	        this._deferreds = null;
+	    }
+
+	    function Handler (onFulfilled, onRejected, resolve, reject) {
+	        this.onFulfilled = typeof onFulfilled === 'function' ? onFulfilled : null;
+	        this.onRejected  = typeof onRejected === 'function' ? onRejected : null;
+	        this.resolve     = resolve;
+	        this.reject      = reject;
+	    }
+
+	    /**
+	     * Take a potentially misbehaving resolver function and make sure
+	     * onFulfilled and onRejected are only called once.
+	     *
+	     * Makes no guarantees about asynchrony.
+	     */
+	    function doResolve (fn, onFulfilled, onRejected) {
+	        var done = false;
+	        try {
+	            fn(function (value) {
+	                if (done) return;
+	                done = true;
+	                onFulfilled(value);
+	            }, function (reason) {
+	                if (done) return;
+	                done = true;
+	                onRejected(reason);
+	            })
+	        } catch (ex) {
+	            if (done) return;
+	            done = true;
+	            onRejected(ex);
+	        }
+	    }
+
+	    Promise.prototype['catch'] = function (onRejected) {
+	        return this.then(null, onRejected);
+	    };
+
+	    Promise.prototype.then = function (onFulfilled, onRejected) {
+	        var me = this;
+	        return new Promise(function (resolve, reject) {
+	            handle.call(me, new Handler(onFulfilled, onRejected, resolve, reject));
+	        })
+	    };
+
+	    Promise.all = function () {
+	        var args = Array.prototype.slice.call(arguments.length === 1 && isArray(arguments[0]) ? arguments[0] : arguments);
+
+	        return new Promise(function (resolve, reject) {
+	            if (args.length === 0) return resolve([]);
+	            var remaining = args.length;
+
+	            function res (i, val) {
+	                try {
+	                    if (val && (typeof val === 'object' || typeof val === 'function')) {
+	                        var then = val.then;
+	                        if (typeof then === 'function') {
+	                            then.call(val, function (val) {
+	                                res(i, val)
+	                            }, reject);
+	                            return;
+	                        }
+	                    }
+	                    args[i] = val;
+	                    if (--remaining === 0) {
+	                        resolve(args);
+	                    }
+	                } catch (ex) {
+	                    reject(ex);
+	                }
+	            }
+
+	            for (var i = 0; i < args.length; i++) {
+	                res(i, args[i]);
+	            }
+	        });
+	    };
+
+	    Promise.resolve = function (value) {
+	        if (value && typeof value === 'object' && value.constructor === Promise) {
+	            return value;
+	        }
+
+	        return new Promise(function (resolve) {
+	            resolve(value);
+	        });
+	    };
+
+	    Promise.reject = function (value) {
+	        return new Promise(function (resolve, reject) {
+	            reject(value);
+	        });
+	    };
+
+	    Promise.race = function (values) {
+	        return new Promise(function (resolve, reject) {
+	            for (var i = 0, len = values.length; i < len; i++) {
+	                values[i].then(resolve, reject);
+	            }
+	        });
+	    };
+
+	    /**
+	     * Set the immediate function to execute callbacks
+	     * @param fn {function} Function to execute
+	     * @private
+	     */
+	    Promise._setImmediateFn = function _setImmediateFn (fn) {
+	        asap = fn;
+	    };
+
+
+	    Promise.prototype.always = function (callback) {
+	        var constructor = this.constructor;
+
+	        return this.then(function (value) {
+	            return constructor.resolve(callback()).then(function () {
+	                return value;
+	            });
+	        }, function (reason) {
+	            return constructor.resolve(callback()).then(function () {
+	                throw reason;
+	            });
+	        });
+	    };
+
+	    if (typeof module !== 'undefined' && module.exports) {
+	        module.exports = Promise;
+	    } else if (!root.Promise) {
+	        root.Promise = Promise;
+	    }
+
+	})(this);
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2).setImmediate))
+
+/***/ },
+/* 2 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/* WEBPACK VAR INJECTION */(function(setImmediate, clearImmediate) {var nextTick = __webpack_require__(3).nextTick;
+	var apply = Function.prototype.apply;
+	var slice = Array.prototype.slice;
+	var immediateIds = {};
+	var nextImmediateId = 0;
+
+	// DOM APIs, for completeness
+
+	exports.setTimeout = function() {
+	  return new Timeout(apply.call(setTimeout, window, arguments), clearTimeout);
+	};
+	exports.setInterval = function() {
+	  return new Timeout(apply.call(setInterval, window, arguments), clearInterval);
+	};
+	exports.clearTimeout =
+	exports.clearInterval = function(timeout) { timeout.close(); };
+
+	function Timeout(id, clearFn) {
+	  this._id = id;
+	  this._clearFn = clearFn;
+	}
+	Timeout.prototype.unref = Timeout.prototype.ref = function() {};
+	Timeout.prototype.close = function() {
+	  this._clearFn.call(window, this._id);
+	};
+
+	// Does not start the time, just sets up the members needed.
+	exports.enroll = function(item, msecs) {
+	  clearTimeout(item._idleTimeoutId);
+	  item._idleTimeout = msecs;
+	};
+
+	exports.unenroll = function(item) {
+	  clearTimeout(item._idleTimeoutId);
+	  item._idleTimeout = -1;
+	};
+
+	exports._unrefActive = exports.active = function(item) {
+	  clearTimeout(item._idleTimeoutId);
+
+	  var msecs = item._idleTimeout;
+	  if (msecs >= 0) {
+	    item._idleTimeoutId = setTimeout(function onTimeout() {
+	      if (item._onTimeout)
+	        item._onTimeout();
+	    }, msecs);
+	  }
+	};
+
+	// That's not how node.js implements it but the exposed api is the same.
+	exports.setImmediate = typeof setImmediate === "function" ? setImmediate : function(fn) {
+	  var id = nextImmediateId++;
+	  var args = arguments.length < 2 ? false : slice.call(arguments, 1);
+
+	  immediateIds[id] = true;
+
+	  nextTick(function onNextTick() {
+	    if (immediateIds[id]) {
+	      // fn.call() is faster so we optimize for the common use-case
+	      // @see http://jsperf.com/call-apply-segu
+	      if (args) {
+	        fn.apply(null, args);
+	      } else {
+	        fn.call(null);
+	      }
+	      // Prevent ids from leaking
+	      exports.clearImmediate(id);
+	    }
+	  });
+
+	  return id;
+	};
+
+	exports.clearImmediate = typeof clearImmediate === "function" ? clearImmediate : function(id) {
+	  delete immediateIds[id];
+	};
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2).setImmediate, __webpack_require__(2).clearImmediate))
+
+/***/ },
+/* 3 */
+/***/ function(module, exports) {
+
+	// shim for using process in browser
+
+	var process = module.exports = {};
+	var queue = [];
+	var draining = false;
+	var currentQueue;
+	var queueIndex = -1;
+
+	function cleanUpNextTick() {
+	    draining = false;
+	    if (currentQueue.length) {
+	        queue = currentQueue.concat(queue);
+	    } else {
+	        queueIndex = -1;
+	    }
+	    if (queue.length) {
+	        drainQueue();
+	    }
+	}
+
+	function drainQueue() {
+	    if (draining) {
+	        return;
+	    }
+	    var timeout = setTimeout(cleanUpNextTick);
+	    draining = true;
+
+	    var len = queue.length;
+	    while(len) {
+	        currentQueue = queue;
+	        queue = [];
+	        while (++queueIndex < len) {
+	            if (currentQueue) {
+	                currentQueue[queueIndex].run();
+	            }
+	        }
+	        queueIndex = -1;
+	        len = queue.length;
+	    }
+	    currentQueue = null;
+	    draining = false;
+	    clearTimeout(timeout);
+	}
+
+	process.nextTick = function (fun) {
+	    var args = new Array(arguments.length - 1);
+	    if (arguments.length > 1) {
+	        for (var i = 1; i < arguments.length; i++) {
+	            args[i - 1] = arguments[i];
+	        }
+	    }
+	    queue.push(new Item(fun, args));
+	    if (queue.length === 1 && !draining) {
+	        setTimeout(drainQueue, 0);
+	    }
+	};
+
+	// v8 likes predictible objects
+	function Item(fun, array) {
+	    this.fun = fun;
+	    this.array = array;
+	}
+	Item.prototype.run = function () {
+	    this.fun.apply(null, this.array);
+	};
+	process.title = 'browser';
+	process.browser = true;
+	process.env = {};
+	process.argv = [];
+	process.version = ''; // empty string to avoid regexp issues
+	process.versions = {};
+
+	function noop() {}
+
+	process.on = noop;
+	process.addListener = noop;
+	process.once = noop;
+	process.off = noop;
+	process.removeListener = noop;
+	process.removeAllListeners = noop;
+	process.emit = noop;
+
+	process.binding = function (name) {
+	    throw new Error('process.binding is not supported');
+	};
+
+	process.cwd = function () { return '/' };
+	process.chdir = function (dir) {
+	    throw new Error('process.chdir is not supported');
+	};
+	process.umask = function() { return 0; };
+
+
+/***/ },
+/* 4 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/* exif */
+	(function () {
+
+	    var debug = false;
+
+	    var root = this;
+
+	    var EXIF = function (obj) {
+	        if (obj instanceof EXIF) return obj;
+	        if (!(this instanceof EXIF)) return new EXIF(obj);
+	        this.EXIFwrapped = obj;
+	    };
+
+	    if (true) {
+	        if (typeof module !== 'undefined' && module.exports) {
+	            exports = module.exports = EXIF;
+	        }
+	        exports.EXIF = EXIF;
+	    } else {
+	        root.EXIF = EXIF;
+	    }
+
+	    var ExifTags = EXIF.Tags = {
+
+	        // version tags
+	        0x9000: "ExifVersion",             // EXIF version
+	        0xA000: "FlashpixVersion",         // Flashpix format version
+
+	        // colorspace tags
+	        0xA001: "ColorSpace",              // Color space information tag
+
+	        // image configuration
+	        0xA002: "PixelXDimension",         // Valid width of meaningful image
+	        0xA003: "PixelYDimension",         // Valid height of meaningful image
+	        0x9101: "ComponentsConfiguration", // Information about channels
+	        0x9102: "CompressedBitsPerPixel",  // Compressed bits per pixel
+
+	        // user information
+	        0x927C: "MakerNote",               // Any desired information written by the manufacturer
+	        0x9286: "UserComment",             // Comments by user
+
+	        // related file
+	        0xA004: "RelatedSoundFile",        // Name of related sound file
+
+	        // date and time
+	        0x9003: "DateTimeOriginal",        // Date and time when the original image was generated
+	        0x9004: "DateTimeDigitized",       // Date and time when the image was stored digitally
+	        0x9290: "SubsecTime",              // Fractions of seconds for DateTime
+	        0x9291: "SubsecTimeOriginal",      // Fractions of seconds for DateTimeOriginal
+	        0x9292: "SubsecTimeDigitized",     // Fractions of seconds for DateTimeDigitized
+
+	        // picture-taking conditions
+	        0x829A: "ExposureTime",            // Exposure time (in seconds)
+	        0x829D: "FNumber",                 // F number
+	        0x8822: "ExposureProgram",         // Exposure program
+	        0x8824: "SpectralSensitivity",     // Spectral sensitivity
+	        0x8827: "ISOSpeedRatings",         // ISO speed rating
+	        0x8828: "OECF",                    // Optoelectric conversion factor
+	        0x9201: "ShutterSpeedValue",       // Shutter speed
+	        0x9202: "ApertureValue",           // Lens aperture
+	        0x9203: "BrightnessValue",         // Value of brightness
+	        0x9204: "ExposureBias",            // Exposure bias
+	        0x9205: "MaxApertureValue",        // Smallest F number of lens
+	        0x9206: "SubjectDistance",         // Distance to subject in meters
+	        0x9207: "MeteringMode",            // Metering mode
+	        0x9208: "LightSource",             // Kind of light source
+	        0x9209: "Flash",                   // Flash status
+	        0x9214: "SubjectArea",             // Location and area of main subject
+	        0x920A: "FocalLength",             // Focal length of the lens in mm
+	        0xA20B: "FlashEnergy",             // Strobe energy in BCPS
+	        0xA20C: "SpatialFrequencyResponse",    //
+	        0xA20E: "FocalPlaneXResolution",   // Number of pixels in width direction per FocalPlaneResolutionUnit
+	        0xA20F: "FocalPlaneYResolution",   // Number of pixels in height direction per FocalPlaneResolutionUnit
+	        0xA210: "FocalPlaneResolutionUnit",    // Unit for measuring FocalPlaneXResolution and FocalPlaneYResolution
+	        0xA214: "SubjectLocation",         // Location of subject in image
+	        0xA215: "ExposureIndex",           // Exposure index selected on camera
+	        0xA217: "SensingMethod",           // Image sensor type
+	        0xA300: "FileSource",              // Image source (3 == DSC)
+	        0xA301: "SceneType",               // Scene type (1 == directly photographed)
+	        0xA302: "CFAPattern",              // Color filter array geometric pattern
+	        0xA401: "CustomRendered",          // Special processing
+	        0xA402: "ExposureMode",            // Exposure mode
+	        0xA403: "WhiteBalance",            // 1 = auto white balance, 2 = manual
+	        0xA404: "DigitalZoomRation",       // Digital zoom ratio
+	        0xA405: "FocalLengthIn35mmFilm",   // Equivalent foacl length assuming 35mm film camera (in mm)
+	        0xA406: "SceneCaptureType",        // Type of scene
+	        0xA407: "GainControl",             // Degree of overall image gain adjustment
+	        0xA408: "Contrast",                // Direction of contrast processing applied by camera
+	        0xA409: "Saturation",              // Direction of saturation processing applied by camera
+	        0xA40A: "Sharpness",               // Direction of sharpness processing applied by camera
+	        0xA40B: "DeviceSettingDescription",    //
+	        0xA40C: "SubjectDistanceRange",    // Distance to subject
+
+	        // other tags
+	        0xA005: "InteroperabilityIFDPointer",
+	        0xA420: "ImageUniqueID"            // Identifier assigned uniquely to each image
+	    };
+
+	    var TiffTags = EXIF.TiffTags = {
+	        0x0100: "ImageWidth",
+	        0x0101: "ImageHeight",
+	        0x8769: "ExifIFDPointer",
+	        0x8825: "GPSInfoIFDPointer",
+	        0xA005: "InteroperabilityIFDPointer",
+	        0x0102: "BitsPerSample",
+	        0x0103: "Compression",
+	        0x0106: "PhotometricInterpretation",
+	        0x0112: "Orientation",
+	        0x0115: "SamplesPerPixel",
+	        0x011C: "PlanarConfiguration",
+	        0x0212: "YCbCrSubSampling",
+	        0x0213: "YCbCrPositioning",
+	        0x011A: "XResolution",
+	        0x011B: "YResolution",
+	        0x0128: "ResolutionUnit",
+	        0x0111: "StripOffsets",
+	        0x0116: "RowsPerStrip",
+	        0x0117: "StripByteCounts",
+	        0x0201: "JPEGInterchangeFormat",
+	        0x0202: "JPEGInterchangeFormatLength",
+	        0x012D: "TransferFunction",
+	        0x013E: "WhitePoint",
+	        0x013F: "PrimaryChromaticities",
+	        0x0211: "YCbCrCoefficients",
+	        0x0214: "ReferenceBlackWhite",
+	        0x0132: "DateTime",
+	        0x010E: "ImageDescription",
+	        0x010F: "Make",
+	        0x0110: "Model",
+	        0x0131: "Software",
+	        0x013B: "Artist",
+	        0x8298: "Copyright"
+	    };
+
+	    var GPSTags = EXIF.GPSTags = {
+	        0x0000: "GPSVersionID",
+	        0x0001: "GPSLatitudeRef",
+	        0x0002: "GPSLatitude",
+	        0x0003: "GPSLongitudeRef",
+	        0x0004: "GPSLongitude",
+	        0x0005: "GPSAltitudeRef",
+	        0x0006: "GPSAltitude",
+	        0x0007: "GPSTimeStamp",
+	        0x0008: "GPSSatellites",
+	        0x0009: "GPSStatus",
+	        0x000A: "GPSMeasureMode",
+	        0x000B: "GPSDOP",
+	        0x000C: "GPSSpeedRef",
+	        0x000D: "GPSSpeed",
+	        0x000E: "GPSTrackRef",
+	        0x000F: "GPSTrack",
+	        0x0010: "GPSImgDirectionRef",
+	        0x0011: "GPSImgDirection",
+	        0x0012: "GPSMapDatum",
+	        0x0013: "GPSDestLatitudeRef",
+	        0x0014: "GPSDestLatitude",
+	        0x0015: "GPSDestLongitudeRef",
+	        0x0016: "GPSDestLongitude",
+	        0x0017: "GPSDestBearingRef",
+	        0x0018: "GPSDestBearing",
+	        0x0019: "GPSDestDistanceRef",
+	        0x001A: "GPSDestDistance",
+	        0x001B: "GPSProcessingMethod",
+	        0x001C: "GPSAreaInformation",
+	        0x001D: "GPSDateStamp",
+	        0x001E: "GPSDifferential"
+	    };
+
+	    var StringValues = EXIF.StringValues = {
+	        ExposureProgram     : {
+	            0: "Not defined",
+	            1: "Manual",
+	            2: "Normal program",
+	            3: "Aperture priority",
+	            4: "Shutter priority",
+	            5: "Creative program",
+	            6: "Action program",
+	            7: "Portrait mode",
+	            8: "Landscape mode"
+	        },
+	        MeteringMode        : {
+	            0  : "Unknown",
+	            1  : "Average",
+	            2  : "CenterWeightedAverage",
+	            3  : "Spot",
+	            4  : "MultiSpot",
+	            5  : "Pattern",
+	            6  : "Partial",
+	            255: "Other"
+	        },
+	        LightSource         : {
+	            0  : "Unknown",
+	            1  : "Daylight",
+	            2  : "Fluorescent",
+	            3  : "Tungsten (incandescent light)",
+	            4  : "Flash",
+	            9  : "Fine weather",
+	            10 : "Cloudy weather",
+	            11 : "Shade",
+	            12 : "Daylight fluorescent (D 5700 - 7100K)",
+	            13 : "Day white fluorescent (N 4600 - 5400K)",
+	            14 : "Cool white fluorescent (W 3900 - 4500K)",
+	            15 : "White fluorescent (WW 3200 - 3700K)",
+	            17 : "Standard light A",
+	            18 : "Standard light B",
+	            19 : "Standard light C",
+	            20 : "D55",
+	            21 : "D65",
+	            22 : "D75",
+	            23 : "D50",
+	            24 : "ISO studio tungsten",
+	            255: "Other"
+	        },
+	        Flash               : {
+	            0x0000: "Flash did not fire",
+	            0x0001: "Flash fired",
+	            0x0005: "Strobe return light not detected",
+	            0x0007: "Strobe return light detected",
+	            0x0009: "Flash fired, compulsory flash mode",
+	            0x000D: "Flash fired, compulsory flash mode, return light not detected",
+	            0x000F: "Flash fired, compulsory flash mode, return light detected",
+	            0x0010: "Flash did not fire, compulsory flash mode",
+	            0x0018: "Flash did not fire, auto mode",
+	            0x0019: "Flash fired, auto mode",
+	            0x001D: "Flash fired, auto mode, return light not detected",
+	            0x001F: "Flash fired, auto mode, return light detected",
+	            0x0020: "No flash function",
+	            0x0041: "Flash fired, red-eye reduction mode",
+	            0x0045: "Flash fired, red-eye reduction mode, return light not detected",
+	            0x0047: "Flash fired, red-eye reduction mode, return light detected",
+	            0x0049: "Flash fired, compulsory flash mode, red-eye reduction mode",
+	            0x004D: "Flash fired, compulsory flash mode, red-eye reduction mode, return light not detected",
+	            0x004F: "Flash fired, compulsory flash mode, red-eye reduction mode, return light detected",
+	            0x0059: "Flash fired, auto mode, red-eye reduction mode",
+	            0x005D: "Flash fired, auto mode, return light not detected, red-eye reduction mode",
+	            0x005F: "Flash fired, auto mode, return light detected, red-eye reduction mode"
+	        },
+	        SensingMethod       : {
+	            1: "Not defined",
+	            2: "One-chip color area sensor",
+	            3: "Two-chip color area sensor",
+	            4: "Three-chip color area sensor",
+	            5: "Color sequential area sensor",
+	            7: "Trilinear sensor",
+	            8: "Color sequential linear sensor"
+	        },
+	        SceneCaptureType    : {
+	            0: "Standard",
+	            1: "Landscape",
+	            2: "Portrait",
+	            3: "Night scene"
+	        },
+	        SceneType           : {
+	            1: "Directly photographed"
+	        },
+	        CustomRendered      : {
+	            0: "Normal process",
+	            1: "Custom process"
+	        },
+	        WhiteBalance        : {
+	            0: "Auto white balance",
+	            1: "Manual white balance"
+	        },
+	        GainControl         : {
+	            0: "None",
+	            1: "Low gain up",
+	            2: "High gain up",
+	            3: "Low gain down",
+	            4: "High gain down"
+	        },
+	        Contrast            : {
+	            0: "Normal",
+	            1: "Soft",
+	            2: "Hard"
+	        },
+	        Saturation          : {
+	            0: "Normal",
+	            1: "Low saturation",
+	            2: "High saturation"
+	        },
+	        Sharpness           : {
+	            0: "Normal",
+	            1: "Soft",
+	            2: "Hard"
+	        },
+	        SubjectDistanceRange: {
+	            0: "Unknown",
+	            1: "Macro",
+	            2: "Close view",
+	            3: "Distant view"
+	        },
+	        FileSource          : {
+	            3: "DSC"
+	        },
+
+	        Components: {
+	            0: "",
+	            1: "Y",
+	            2: "Cb",
+	            3: "Cr",
+	            4: "R",
+	            5: "G",
+	            6: "B"
+	        }
+	    };
+
+	    function addEvent (element, event, handler) {
+	        if (element.addEventListener) {
+	            element.addEventListener(event, handler, false);
+	        } else if (element.attachEvent) {
+	            element.attachEvent("on" + event, handler);
+	        }
+	    }
+
+	    function imageHasData (img) {
+	        return !!(img.exifdata);
+	    }
+
+
+	    function base64ToArrayBuffer (base64, contentType) {
+	        contentType = contentType || base64.match(/^data\:([^\;]+)\;base64,/mi)[1] || ''; // e.g. 'data:image/jpeg;base64,...' => 'image/jpeg'
+	        base64     = base64.replace(/^data\:([^\;]+)\;base64,/gmi, '');
+	        var binary = atob(base64);
+	        var len    = binary.length;
+	        var buffer = new ArrayBuffer(len);
+	        var view   = new Uint8Array(buffer);
+	        for (var i = 0; i < len; i++) {
+	            view[i] = binary.charCodeAt(i);
+	        }
+	        return buffer;
+	    }
+
+	    function objectURLToBlob (url, callback) {
+	        var http          = new XMLHttpRequest();
+	        http.open("GET", url, true);
+	        http.responseType = "blob";
+	        http.onload       = function (e) {
+	            if (this.status == 200 || this.status === 0) {
+	                callback(this.response);
+	            }
+	        };
+	        http.send();
+	    }
+
+	    function getImageData (img, callback) {
+	        function handleBinaryFile (binFile) {
+	            var data     = findEXIFinJPEG(binFile);
+	            var iptcdata = findIPTCinJPEG(binFile);
+	            img.exifdata = data || {};
+	            img.iptcdata = iptcdata || {};
+	            if (callback) {
+	                callback.call(img);
+	            }
+	        }
+
+	        if (img.src) {
+	            if (/^data\:/i.test(img.src)) { // Data URI
+	                var arrayBuffer = base64ToArrayBuffer(img.src);
+	                handleBinaryFile(arrayBuffer);
+
+	            } else if (/^blob\:/i.test(img.src)) { // Object URL
+	                var fileReader    = new FileReader();
+	                fileReader.onload = function (e) {
+	                    handleBinaryFile(e.target.result);
+	                };
+	                objectURLToBlob(img.src, function (blob) {
+	                    fileReader.readAsArrayBuffer(blob);
+	                });
+	            } else {
+	                var http          = new XMLHttpRequest();
+	                http.onload       = function () {
+	                    if (this.status == 200 || this.status === 0) {
+	                        handleBinaryFile(http.response);
+	                    } else {
+	                        callback(new Error("Could not load image"));
+	                    }
+	                    http = null;
+	                };
+	                http.open("GET", img.src, true);
+	                http.responseType = "arraybuffer";
+	                http.send(null);
+	            }
+	        } else if (window.FileReader && (img instanceof window.Blob || img instanceof window.File)) {
+	            var fileReader    = new FileReader();
+	            fileReader.onload = function (e) {
+	                if (debug) console.log("Got file of length " + e.target.result.byteLength);
+	                handleBinaryFile(e.target.result);
+	            };
+
+	            fileReader.readAsArrayBuffer(img);
+	        }
+	    }
+
+	    function findEXIFinJPEG (file) {
+	        var dataView = new DataView(file);
+
+	        if (debug) console.log("Got file of length " + file.byteLength);
+	        if ((dataView.getUint8(0) != 0xFF) || (dataView.getUint8(1) != 0xD8)) {
+	            if (debug) console.log("Not a valid JPEG");
+	            return false; // not a valid jpeg
+	        }
+
+	        var offset = 2,
+	            length = file.byteLength,
+	            marker;
+
+	        while (offset < length) {
+	            if (dataView.getUint8(offset) != 0xFF) {
+	                if (debug) console.log("Not a valid marker at offset " + offset + ", found: " + dataView.getUint8(offset));
+	                return false; // not a valid marker, something is wrong
+	            }
+
+	            marker = dataView.getUint8(offset + 1);
+	            if (debug) console.log(marker);
+
+	            // we could implement handling for other markers here,
+	            // but we're only looking for 0xFFE1 for EXIF data
+
+	            if (marker == 225) {
+	                if (debug) console.log("Found 0xFFE1 marker");
+
+	                return readEXIFData(dataView, offset + 4, dataView.getUint16(offset + 2) - 2);
+
+	                // offset += 2 + file.getShortAt(offset+2, true);
+
+	            } else {
+	                offset += 2 + dataView.getUint16(offset + 2);
+	            }
+
+	        }
+
+	    }
+
+	    function findIPTCinJPEG (file) {
+	        var dataView = new DataView(file);
+
+	        if (debug) console.log("Got file of length " + file.byteLength);
+	        if ((dataView.getUint8(0) != 0xFF) || (dataView.getUint8(1) != 0xD8)) {
+	            if (debug) console.log("Not a valid JPEG");
+	            return false; // not a valid jpeg
+	        }
+
+	        var offset = 2,
+	            length = file.byteLength;
+
+
+	        var isFieldSegmentStart = function (dataView, offset) {
+	            return (
+	                dataView.getUint8(offset) === 0x38 &&
+	                dataView.getUint8(offset + 1) === 0x42 &&
+	                dataView.getUint8(offset + 2) === 0x49 &&
+	                dataView.getUint8(offset + 3) === 0x4D &&
+	                dataView.getUint8(offset + 4) === 0x04 &&
+	                dataView.getUint8(offset + 5) === 0x04
+	            );
+	        };
+
+	        while (offset < length) {
+
+	            if (isFieldSegmentStart(dataView, offset)) {
+
+	                // Get the length of the name header (which is padded to an even number of bytes)
+	                var nameHeaderLength = dataView.getUint8(offset + 7);
+	                if (nameHeaderLength % 2 !== 0) nameHeaderLength += 1;
+	                // Check for pre photoshop 6 format
+	                if (nameHeaderLength === 0) {
+	                    // Always 4
+	                    nameHeaderLength = 4;
+	                }
+
+	                var startOffset   = offset + 8 + nameHeaderLength;
+	                var sectionLength = dataView.getUint16(offset + 6 + nameHeaderLength);
+
+	                return readIPTCData(file, startOffset, sectionLength);
+
+	                break;
+
+	            }
+
+
+	            // Not the marker, continue searching
+	            offset++;
+
+	        }
+
+	    }
+
+	    var IptcFieldMap = {
+	        0x78: 'caption',
+	        0x6E: 'credit',
+	        0x19: 'keywords',
+	        0x37: 'dateCreated',
+	        0x50: 'byline',
+	        0x55: 'bylineTitle',
+	        0x7A: 'captionWriter',
+	        0x69: 'headline',
+	        0x74: 'copyright',
+	        0x0F: 'category'
+	    };
+
+	    function readIPTCData (file, startOffset, sectionLength) {
+	        var dataView        = new DataView(file);
+	        var data            = {};
+	        var fieldValue, fieldName, dataSize, segmentType, segmentSize;
+	        var segmentStartPos = startOffset;
+	        while (segmentStartPos < startOffset + sectionLength) {
+	            if (dataView.getUint8(segmentStartPos) === 0x1C && dataView.getUint8(segmentStartPos + 1) === 0x02) {
+	                segmentType = dataView.getUint8(segmentStartPos + 2);
+	                if (segmentType in IptcFieldMap) {
+	                    dataSize    = dataView.getInt16(segmentStartPos + 3);
+	                    segmentSize = dataSize + 5;
+	                    fieldName   = IptcFieldMap[segmentType];
+	                    fieldValue  = getStringFromDB(dataView, segmentStartPos + 5, dataSize);
+	                    // Check if we already stored a value with this name
+	                    if (data.hasOwnProperty(fieldName)) {
+	                        // Value already stored with this name, create multivalue field
+	                        if (data[fieldName] instanceof Array) {
+	                            data[fieldName].push(fieldValue);
+	                        }
+	                        else {
+	                            data[fieldName] = [data[fieldName], fieldValue];
+	                        }
+	                    }
+	                    else {
+	                        data[fieldName] = fieldValue;
+	                    }
+	                }
+
+	            }
+	            segmentStartPos++;
+	        }
+	        return data;
+	    }
+
+
+	    function readTags (file, tiffStart, dirStart, strings, bigEnd) {
+	        var entries = file.getUint16(dirStart, !bigEnd),
+	            tags    = {},
+	            entryOffset, tag,
+	            i;
+
+	        for (i = 0; i < entries; i++) {
+	            entryOffset = dirStart + i * 12 + 2;
+	            tag         = strings[file.getUint16(entryOffset, !bigEnd)];
+	            if (!tag && debug) console.log("Unknown tag: " + file.getUint16(entryOffset, !bigEnd));
+	            tags[tag] = readTagValue(file, entryOffset, tiffStart, dirStart, bigEnd);
+	        }
+	        return tags;
+	    }
+
+
+	    function readTagValue (file, entryOffset, tiffStart, dirStart, bigEnd) {
+	        var type        = file.getUint16(entryOffset + 2, !bigEnd),
+	            numValues   = file.getUint32(entryOffset + 4, !bigEnd),
+	            valueOffset = file.getUint32(entryOffset + 8, !bigEnd) + tiffStart,
+	            offset,
+	            vals, val, n,
+	            numerator, denominator;
+
+	        switch (type) {
+	            case 1: // byte, 8-bit unsigned int
+	            case 7: // undefined, 8-bit byte, value depending on field
+	                if (numValues == 1) {
+	                    return file.getUint8(entryOffset + 8, !bigEnd);
+	                } else {
+	                    offset = numValues > 4 ? valueOffset : (entryOffset + 8);
+	                    vals   = [];
+	                    for (n = 0; n < numValues; n++) {
+	                        vals[n] = file.getUint8(offset + n);
+	                    }
+	                    return vals;
+	                }
+
+	            case 2: // ascii, 8-bit byte
+	                offset = numValues > 4 ? valueOffset : (entryOffset + 8);
+	                return getStringFromDB(file, offset, numValues - 1);
+
+	            case 3: // short, 16 bit int
+	                if (numValues == 1) {
+	                    return file.getUint16(entryOffset + 8, !bigEnd);
+	                } else {
+	                    offset = numValues > 2 ? valueOffset : (entryOffset + 8);
+	                    vals   = [];
+	                    for (n = 0; n < numValues; n++) {
+	                        vals[n] = file.getUint16(offset + 2 * n, !bigEnd);
+	                    }
+	                    return vals;
+	                }
+
+	            case 4: // long, 32 bit int
+	                if (numValues == 1) {
+	                    return file.getUint32(entryOffset + 8, !bigEnd);
+	                } else {
+	                    vals = [];
+	                    for (n = 0; n < numValues; n++) {
+	                        vals[n] = file.getUint32(valueOffset + 4 * n, !bigEnd);
+	                    }
+	                    return vals;
+	                }
+
+	            case 5:    // rational = two long values, first is numerator, second is denominator
+	                if (numValues == 1) {
+	                    numerator       = file.getUint32(valueOffset, !bigEnd);
+	                    denominator     = file.getUint32(valueOffset + 4, !bigEnd);
+	                    val             = new Number(numerator / denominator);
+	                    val.numerator   = numerator;
+	                    val.denominator = denominator;
+	                    return val;
+	                } else {
+	                    vals = [];
+	                    for (n = 0; n < numValues; n++) {
+	                        numerator           = file.getUint32(valueOffset + 8 * n, !bigEnd);
+	                        denominator         = file.getUint32(valueOffset + 4 + 8 * n, !bigEnd);
+	                        vals[n]             = new Number(numerator / denominator);
+	                        vals[n].numerator   = numerator;
+	                        vals[n].denominator = denominator;
+	                    }
+	                    return vals;
+	                }
+
+	            case 9: // slong, 32 bit signed int
+	                if (numValues == 1) {
+	                    return file.getInt32(entryOffset + 8, !bigEnd);
+	                } else {
+	                    vals = [];
+	                    for (n = 0; n < numValues; n++) {
+	                        vals[n] = file.getInt32(valueOffset + 4 * n, !bigEnd);
+	                    }
+	                    return vals;
+	                }
+
+	            case 10: // signed rational, two slongs, first is numerator, second is denominator
+	                if (numValues == 1) {
+	                    return file.getInt32(valueOffset, !bigEnd) / file.getInt32(valueOffset + 4, !bigEnd);
+	                } else {
+	                    vals = [];
+	                    for (n = 0; n < numValues; n++) {
+	                        vals[n] = file.getInt32(valueOffset + 8 * n, !bigEnd) / file.getInt32(valueOffset + 4 + 8 * n, !bigEnd);
+	                    }
+	                    return vals;
+	                }
+	        }
+	    }
+
+	    function getStringFromDB (buffer, start, length) {
+	        var outstr = "", n;
+	        for (n = start; n < start + length; n++) {
+	            outstr += String.fromCharCode(buffer.getUint8(n));
+	        }
+	        return outstr;
+	    }
+
+	    function readEXIFData (file, start) {
+	        if (getStringFromDB(file, start, 4) != "Exif") {
+	            if (debug) console.log("Not valid EXIF data! " + getStringFromDB(file, start, 4));
+	            return false;
+	        }
+
+	        var bigEnd,
+	            tags, tag,
+	            exifData, gpsData,
+	            tiffOffset = start + 6;
+
+	        // test for TIFF validity and endianness
+	        if (file.getUint16(tiffOffset) == 0x4949) {
+	            bigEnd = false;
+	        } else if (file.getUint16(tiffOffset) == 0x4D4D) {
+	            bigEnd = true;
+	        } else {
+	            if (debug) console.log("Not valid TIFF data! (no 0x4949 or 0x4D4D)");
+	            return false;
+	        }
+
+	        if (file.getUint16(tiffOffset + 2, !bigEnd) != 0x002A) {
+	            if (debug) console.log("Not valid TIFF data! (no 0x002A)");
+	            return false;
+	        }
+
+	        var firstIFDOffset = file.getUint32(tiffOffset + 4, !bigEnd);
+
+	        if (firstIFDOffset < 0x00000008) {
+	            if (debug) console.log("Not valid TIFF data! (First offset less than 8)", file.getUint32(tiffOffset + 4, !bigEnd));
+	            return false;
+	        }
+
+	        tags = readTags(file, tiffOffset, tiffOffset + firstIFDOffset, TiffTags, bigEnd);
+
+	        if (tags.ExifIFDPointer) {
+	            exifData = readTags(file, tiffOffset, tiffOffset + tags.ExifIFDPointer, ExifTags, bigEnd);
+	            for (tag in exifData) {
+	                switch (tag) {
+	                    case "LightSource" :
+	                    case "Flash" :
+	                    case "MeteringMode" :
+	                    case "ExposureProgram" :
+	                    case "SensingMethod" :
+	                    case "SceneCaptureType" :
+	                    case "SceneType" :
+	                    case "CustomRendered" :
+	                    case "WhiteBalance" :
+	                    case "GainControl" :
+	                    case "Contrast" :
+	                    case "Saturation" :
+	                    case "Sharpness" :
+	                    case "SubjectDistanceRange" :
+	                    case "FileSource" :
+	                        exifData[tag] = StringValues[tag][exifData[tag]];
+	                        break;
+
+	                    case "ExifVersion" :
+	                    case "FlashpixVersion" :
+	                        exifData[tag] = String.fromCharCode(exifData[tag][0], exifData[tag][1], exifData[tag][2], exifData[tag][3]);
+	                        break;
+
+	                    case "ComponentsConfiguration" :
+	                        exifData[tag] =
+	                            StringValues.Components[exifData[tag][0]] +
+	                            StringValues.Components[exifData[tag][1]] +
+	                            StringValues.Components[exifData[tag][2]] +
+	                            StringValues.Components[exifData[tag][3]];
+	                        break;
+	                }
+	                tags[tag] = exifData[tag];
+	            }
+	        }
+
+	        if (tags.GPSInfoIFDPointer) {
+	            gpsData = readTags(file, tiffOffset, tiffOffset + tags.GPSInfoIFDPointer, GPSTags, bigEnd);
+	            for (tag in gpsData) {
+	                switch (tag) {
+	                    case "GPSVersionID" :
+	                        gpsData[tag] = gpsData[tag][0] +
+	                            "." + gpsData[tag][1] +
+	                            "." + gpsData[tag][2] +
+	                            "." + gpsData[tag][3];
+	                        break;
+	                }
+	                tags[tag] = gpsData[tag];
+	            }
+	        }
+
+	        return tags;
+	    }
+
+	    EXIF.getData = function (img, callback) {
+	        if ((img instanceof Image || img instanceof HTMLImageElement) && !img.complete) return false;
+
+	        if (!imageHasData(img)) {
+	            getImageData(img, callback);
+	        } else {
+	            if (callback) {
+	                callback.call(img);
+	            }
+	        }
+	        return true;
+	    }
+
+	    EXIF.getTag = function (img, tag) {
+	        if (!imageHasData(img)) return;
+	        return img.exifdata[tag];
+	    }
+
+	    EXIF.getAllTags = function (img) {
+	        if (!imageHasData(img)) return {};
+	        var a,
+	            data = img.exifdata,
+	            tags = {};
+	        for (a in data) {
+	            if (data.hasOwnProperty(a)) {
+	                tags[a] = data[a];
+	            }
+	        }
+	        return tags;
+	    }
+
+	    EXIF.pretty = function (img) {
+	        if (!imageHasData(img)) return "";
+	        var a,
+	            data      = img.exifdata,
+	            strPretty = "";
+	        for (a in data) {
+	            if (data.hasOwnProperty(a)) {
+	                if (typeof data[a] == "object") {
+	                    if (data[a] instanceof Number) {
+	                        strPretty += a + " : " + data[a] + " [" + data[a].numerator + "/" + data[a].denominator + "]\r\n";
+	                    } else {
+	                        strPretty += a + " : [" + data[a].length + " values]\r\n";
+	                    }
+	                } else {
+	                    strPretty += a + " : " + data[a] + "\r\n";
+	                }
+	            }
+	        }
+	        return strPretty;
+	    }
+
+	    EXIF.readFromBinaryFile = function (file) {
+	        return findEXIFinJPEG(file);
+	    }
+
+	    if (true) {
+	        !(__WEBPACK_AMD_DEFINE_ARRAY__ = [], __WEBPACK_AMD_DEFINE_RESULT__ = function () {
+	            return EXIF;
+	        }.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
+	    }
+	}.call(this));
+
+/***/ }
+/******/ ])
+});
+;

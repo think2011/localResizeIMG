@@ -47,24 +47,38 @@ document.querySelector('input').addEventListener('change', function () {
                 resultSize = toFixed2(rst.fileLen / 1024),
                 scale      = parseInt(100 - (resultSize / sourceSize * 100));
 
+            // 原生ajax上传代码
+            // 其他框架，例如ajax处理formData略有不同，请自行google，baidu。
+            var xhr = new XMLHttpRequest();
+            xhr.open('POST', 'http://localhost:5000/');
 
-            /*
-             上传测试
-             var xhr    = new XMLHttpRequest();
+            xhr.onload = function () {
+                if (xhr.status === 200) {
+                    // 上传成功
+                } else {
+                    // 处理错误
+                }
 
-             xhr.open('POST', '/');
-             xhr.onload = function () {
-             if (xhr.status === 200) {
-             // 上传成功
-             } else {
-             // 处理错误
-             }
-             };
+                console.log(xhr.status);
+            };
 
-             rst.formData.append('a', '我是参数');
-             xhr.send(rst.formData);
-             */
+            xhr.onerror = function () {
+                // 处理错误
+                console.log('error');
+            };
 
+            xhr.upload.onprogress = function (e) {
+                // 上传进度
+                var percentComplete = ((e.loaded / e.total) || 0) * 100;
+                console.log(percentComplete);
+            };
+
+            // 添加参数和触发上传
+            rst.formData.append('a', '我是参数');
+            xhr.send(rst.formData);
+
+
+            console.info('这里有一段ajax请求，看见Access-Control-Allow-Origin错误是正常的');
 
             p.style.fontSize = 13 + 'px';
             p.innerHTML      = '源文件：<span class="text-danger">' +

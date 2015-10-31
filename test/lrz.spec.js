@@ -6,7 +6,7 @@ describe("测试压缩正常运作", function () {
     it("通过基本例子", function () {
         return lrz('base/test/img/transparent_png.png')
             .then(function (formData, rst) {
-                expect(rst).to.all.keys('origin', 'base64', 'base64Len');
+                expect(rst).to.all.keys('origin', 'base64', 'fileLen');
             });
     });
 });

@@ -15,7 +15,7 @@
 
 
 # 介绍说明
-在前端压缩好要上传的图片可以更快的发送给后端，因此也特别适合在移动设备上使用。
+在客户端压缩好要上传的图片可以节省带宽更快的发送给后端，特别适合在移动设备上使用。
 
 * 兼容IOS&Android，修复了IOS和Android某些版本已知的BUG（`这也是插件最有意义的存在价值`）。
 
@@ -23,20 +23,19 @@
 
 * 原生JS编写，不依赖例如`jquery`等第三方库。
 
+* 支持AMD or CMD规范
+
 # 如何获取
 
 通过以下方式都可以下载：
 
-1. 执行`npm i lrz`（推荐）
-2. 执行`bower install lrz`
-3. 或者 `git clone`本库
-4. 要么 在页面右侧点击`download zip`
+1. 执行`bower install lrz`（推荐）
+2. 执行`npm i lrz`
 
 接着在页面中引入
 ```html
 <script src="./dist/lrz.bundle.js"></script>
 ```
-`请绝对不要删除【dist】目录下的任何文件，那些是某些情况自动按需载入的文件。`
 
 # 如何使用
 
@@ -96,9 +95,13 @@ IE9以上及大部分非IE浏览器（chrome、微信什么的）
 
 # FAQ
 
-[有疑问请直接在 issues 中提问 🙈](https://github.com/think2011/localResizeIMG/issues)，顺便附上以下内容吧：
+[有疑问请直接在 issues 中提问](https://github.com/think2011/localResizeIMG/issues)，
 
 ```
+请一定记得附上以下内容：💡
+请一定记得附上以下内容：
+请一定记得附上以下内容：
+
 平台：微信..
 设备：iPhone5 IOS7..
 问题：问题描述呗..
@@ -111,7 +114,7 @@ IE9以上及大部分非IE浏览器（chrome、微信什么的）
 * A：虽然已作了优化处理，但内存似乎还是爆掉了，常见于低配android手机，建议每次只处理一张图片。
 
 * Q: 怎么批量上传图片?
-* A: 您可以自己写个循环来传入用户多选的图片，但在移动端上请勿这样做，原因同上。
+* A: 您可以自己写个循环来传入用户多选的图片，但在移动端上请谨慎处理，原因同上。
 
 * Q: 直接传入图片路径的无法生成图片
 * A: 可能是跨域的问题，具体请看[CORS_enabled_image](https://developer.mozilla.org/en-US/docs/Web/HTML/CORS_enabled_image)

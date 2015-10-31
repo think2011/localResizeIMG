@@ -61,6 +61,7 @@ Lrz.prototype.init = function () {
     if (!document.createElement('canvas').getContext) {
         throw new Error('浏览器不支持canvas');
     }
+
     return new Promise(function (resolve, reject) {
         img.onerror = function () {
             throw new Error('加载图片文件失败');
@@ -102,33 +103,35 @@ Lrz.prototype._getBase64 = function () {
         file   = that.file,
         canvas = that.canvas;
 
-    var setCanvas = function () {
-    };
+    try {
+        return new Promise(function (resolve) {
+            // 传入blob在android4.3以下有bug
+            exif.getData(typeof file === 'object' ? file : img, function () {
+                that.orientation = exif.getTag(this, "Orientation");
 
-    return new Promise(function (resolve) {
-        // 传入blob在android4.3以下有bug
-        exif.getData(typeof file === 'object' ? file : img, function () {
-            that.orientation = exif.getTag(this, "Orientation");
+                that.resize = that._getResize();
+                that.ctx    = canvas.getContext('2d');
 
-            that.resize = that._getResize();
-            that.ctx    = canvas.getContext('2d');
+                canvas.width  = that.resize.width;
+                canvas.height = that.resize.height;
 
-            canvas.width  = that.resize.width;
-            canvas.height = that.resize.height;
+                // 设置为白色背景，jpg是不支持透明的，所以会被默认为canvas默认的黑色背景。
+                that.ctx.fillStyle = '#fff';
+                that.ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-            // 设置为白色背景，jpg是不支持透明的，所以会被默认为canvas默认的黑色背景。
-            that.ctx.fillStyle = '#fff';
-            that.ctx.fillRect(0, 0, canvas.width, canvas.height);
-
-            // 根据设备对应处理方式
-            if (UA.oldIOS) {
-                that._createBase64ForOldIOS().then(resolve);
-            }
-            else {
-                that._createBase64().then(resolve);
-            }
+                // 根据设备对应处理方式
+                if (UA.oldIOS) {
+                    that._createBase64ForOldIOS().then(resolve);
+                }
+                else {
+                    that._createBase64().then(resolve);
+                }
+            });
         });
-    });
+    } catch (err) {
+        // 这样能解决低内存设备闪退的问题吗？
+        throw new Error(err);
+    }
 };
 
 
@@ -242,14 +245,6 @@ Lrz.prototype._getResize = function () {
         height: img.height
     };
 
-    if (orientation && ("5678".indexOf(orientation) > -1)) {
-        ret.width  = img.height;
-        ret.height = img.width;
-
-        width  = defaults.height;
-        height = defaults.width;
-    }
-
     // 如果原图小于设定，采用原图
     if (ret.width < width || ret.height < height) {
         return ret;
@@ -310,6 +305,34 @@ function getJsDir (src) {
     if (!script) return null;
 
     return script.src.substr(0, script.src.lastIndexOf('/'));
+}
+
+
+/**
+ * 转换成formdata
+ * @param dataURI
+ * @returns {*}
+ *
+ * @source http://stackoverflow.com/questions/4998908/convert-data-uri-to-file-then-append-to-formdata
+ */
+function dataURItoBlob (dataURI) {
+    // convert base64/URLEncoded data component to raw binary data held in a string
+    var byteString;
+    if (dataURI.split(',')[0].indexOf('base64') >= 0)
+        byteString = atob(dataURI.split(',')[1]);
+    else
+        byteString = unescape(dataURI.split(',')[1]);
+
+    // separate out the mime component
+    var mimeString = dataURI.split(',')[0].split(':')[1].split(';')[0];
+
+    // write the bytes of the string to a typed array
+    var ia = new Uint8Array(byteString.length);
+    for (var i = 0; i < byteString.length; i++) {
+        ia[i] = byteString.charCodeAt(i);
+    }
+
+    return new Blob([ia], {type: mimeString});
 }
 
 window.lrz = function (file, opts) {

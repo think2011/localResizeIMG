@@ -95,12 +95,12 @@ IE9以上及大部分非IE浏览器（chrome、微信什么的）
 
 # FAQ
 
-[有疑问请直接在 issues 中提问](https://github.com/think2011/localResizeIMG/issues)，
+[有疑问请直接在 issues 中提问](https://github.com/think2011/localResizeIMG/issues)
 
 ```
 请一定记得附上以下内容：💡
-请一定记得附上以下内容：
-请一定记得附上以下内容：
+请一定记得附上以下内容：🙈
+请一定记得附上以下内容：💡
 
 平台：微信..
 设备：iPhone5 IOS7..

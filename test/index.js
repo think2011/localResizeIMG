@@ -39,7 +39,7 @@ document.querySelector('input').addEventListener('change', function () {
     lrz(that.files[0], {
         width: 1024
     })
-        .then(function (rst) {
+        .then(function (formData, rst) {
             var img        = new Image(),
                 div        = document.createElement('div'),
                 p          = document.createElement('p'),
@@ -74,8 +74,8 @@ document.querySelector('input').addEventListener('change', function () {
             };
 
             // 添加参数和触发上传
-            rst.formData.append('a', '我是参数');
-            xhr.send(rst.formData);
+            formData.append('a', '我是参数');
+            xhr.send(formData);
 
 
             console.info('这里有一段ajax请求，看见Access-Control-Allow-Origin错误是正常的');

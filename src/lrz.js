@@ -86,10 +86,11 @@ Lrz.prototype.init = function () {
 
                     formData.append(that.defaults.fieldName, file);
 
-                    resolve(formData, {
-                        fileLen: file.size,
-                        base64 : base64,
-                        origin : that.file
+                    resolve({
+                        formData: formData,
+                        fileLen : file.size,
+                        base64  : base64,
+                        origin  : that.file
                     });
 
                     // 释放内存

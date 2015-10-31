@@ -51,7 +51,7 @@
 ```js
 function upload () {
     lrz(this.files[0])
-        .then(function (formData, rst) {
+        .then(function (rst) {
             // 处理成功会执行
         })
         .catch(function (err) {
@@ -69,7 +69,7 @@ function upload () {
 
 ```js
 lrz('./xxx/xx/x.png')
-        .then(function (formData, rst) {
+        .then(function (rst) {
             // 处理成功会执行
         })
         .catch(function (err){

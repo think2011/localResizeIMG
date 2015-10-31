@@ -39,7 +39,7 @@ document.querySelector('input').addEventListener('change', function () {
     lrz(that.files[0], {
         width: 1024
     })
-        .then(function (formData, rst) {
+        .then(function (rst) {
             var img        = new Image(),
                 div        = document.createElement('div'),
                 p          = document.createElement('p'),
@@ -47,6 +47,7 @@ document.querySelector('input').addEventListener('change', function () {
                 resultSize = toFixed2(rst.fileLen / 1024),
                 scale      = parseInt(100 - (resultSize / sourceSize * 100));
 
+            /* ==================================================== */
             // 原生ajax上传代码
             // 其他框架，例如ajax处理formData略有不同，请自行google，baidu。
             var xhr = new XMLHttpRequest();
@@ -56,29 +57,25 @@ document.querySelector('input').addEventListener('change', function () {
                 if (xhr.status === 200) {
                     // 上传成功
                 } else {
-                    // 处理错误
+                    // 处理其他情况
                 }
-
-                console.log(xhr.status);
             };
 
             xhr.onerror = function () {
                 // 处理错误
-                console.log('error');
             };
 
             xhr.upload.onprogress = function (e) {
                 // 上传进度
                 var percentComplete = ((e.loaded / e.total) || 0) * 100;
-                console.log(percentComplete);
             };
 
             // 添加参数和触发上传
-            formData.append('a', '我是参数');
-            xhr.send(formData);
+            rst.formData.append('a', '我是参数');
+            xhr.send(rst.formData);
+            /* ==================================================== */
 
-
-            console.info('这里有一段ajax请求，看见Access-Control-Allow-Origin错误是正常的');
+            console.info('这里有一段ajax请求，看见出错是正常的');
 
             p.style.fontSize = 13 + 'px';
             p.innerHTML      = '源文件：<span class="text-danger">' +

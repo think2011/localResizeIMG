@@ -31,6 +31,7 @@
     "gulp-webpack": "^1.5.0",
     "karma": "^0.13.8",
     "karma-chai": "^0.1.0",
+    "karma-chrome-launcher": "^0.2.1",
     "karma-mocha": "^0.2.0",
     "karma-phantomjs-launcher": "^0.2.1",
     "karma-spec-reporter": "0.0.20",

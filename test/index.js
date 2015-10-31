@@ -44,14 +44,33 @@ document.querySelector('input').addEventListener('change', function () {
                 div        = document.createElement('div'),
                 p          = document.createElement('p'),
                 sourceSize = toFixed2(that.files[0].size / 1024),
-                resultSize = toFixed2(rst.base64Len / 1024),
+                resultSize = toFixed2(rst.fileLen / 1024),
                 scale      = parseInt(100 - (resultSize / sourceSize * 100));
+
+
+            /*
+             上传测试
+             var xhr    = new XMLHttpRequest();
+
+             xhr.open('POST', '/');
+             xhr.onload = function () {
+             if (xhr.status === 200) {
+             // 上传成功
+             } else {
+             // 处理错误
+             }
+             };
+
+             rst.formData.append('a', '我是参数');
+             xhr.send(rst.formData);
+             */
+
 
             p.style.fontSize = 13 + 'px';
             p.innerHTML      = '源文件：<span class="text-danger">' +
                 sourceSize + 'KB' +
                 '</span> <br />' +
-                '压缩后传输Base64：<span class="text-success">' +
+                '压缩后传输大小：<span class="text-success">' +
                 resultSize + 'KB (省' + scale + '%)' +
                 '</span> ';
 

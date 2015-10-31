@@ -5,5 +5,3 @@
 例如：https://github.com/think2011/localResizeIMG/issues/6
 
 3. 【*.map】文件是供调试用的，正式使用删不删除都没关系，因为仅在调试时才会载入。
-
-4. 还有，实测不支持AMD || CMD引用，请自行包装。

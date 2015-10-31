@@ -32,9 +32,10 @@ function Lrz (file, opts) {
     opts = opts || {};
 
     that.defaults = {
-        width  : null,
-        height : null,
-        quality: 0.7
+        width    : null,
+        height   : null,
+        fieldName: 'file',
+        quality  : 0.7
     };
 
     that.file = file;
@@ -75,10 +76,21 @@ Lrz.prototype.init = function () {
                     return base64;
                 })
                 .then(function (base64) {
+                    var formData = new FormData(),
+                        file     = dataURItoBlob(base64);
+
+                    // 压缩文件太大就采用源文件
+                    if (typeof that.file === 'object' && base64.length > that.file.size) {
+                        file = that.file;
+                    }
+
+                    formData.append(that.defaults.fieldName, file);
+
                     resolve({
-                        origin   : that.file,
-                        base64   : base64,
-                        base64Len: base64.length
+                        formData: formData,
+                        fileLen : file.size,
+                        base64  : base64,
+                        origin  : that.file
                     });
 
                     // 释放内存
@@ -103,8 +115,8 @@ Lrz.prototype._getBase64 = function () {
         file   = that.file,
         canvas = that.canvas;
 
-    try {
-        return new Promise(function (resolve) {
+    return new Promise(function (resolve) {
+        try {
             // 传入blob在android4.3以下有bug
             exif.getData(typeof file === 'object' ? file : img, function () {
                 that.orientation = exif.getTag(this, "Orientation");
@@ -127,11 +139,11 @@ Lrz.prototype._getBase64 = function () {
                     that._createBase64().then(resolve);
                 }
             });
-        });
-    } catch (err) {
-        // 这样能解决低内存设备闪退的问题吗？
-        throw new Error(err);
-    }
+        } catch (err) {
+            // 这样能解决低内存设备闪退的问题吗？
+            throw new Error(err);
+        }
+    });
 };
 
 

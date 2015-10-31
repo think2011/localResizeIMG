@@ -77,18 +77,20 @@ Lrz.prototype.init = function () {
                 })
                 .then(function (base64) {
                     var formData = new FormData(),
-                        file     = dataURItoBlob(base64);
+                        file     = dataURItoBlob(base64),
+                        size     = base64.length;
 
                     // 压缩文件太大就采用源文件
                     if (typeof that.file === 'object' && base64.length > that.file.size) {
                         file = that.file;
+                        size = file.size;
                     }
 
                     formData.append(that.defaults.fieldName, file);
 
                     resolve({
                         formData: formData,
-                        fileLen : file.size,
+                        fileLen : size,
                         base64  : base64,
                         origin  : that.file
                     });

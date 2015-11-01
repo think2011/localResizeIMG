@@ -51,7 +51,7 @@ document.querySelector('input').addEventListener('change', function () {
             // 原生ajax上传代码，所以看起来特别多 ╮(╯_╰)╭，但绝对能用
             // 其他框架，例如ajax处理formData略有不同，请自行google，baidu。
             var xhr = new XMLHttpRequest();
-            xhr.open('POST', 'http://localhost:5000/');
+            xhr.open('POST', '/upload');
 
             xhr.onload = function () {
                 if (xhr.status === 200) {

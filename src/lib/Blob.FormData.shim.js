@@ -1,7 +1,7 @@
 //@source https://xts.so/demo/compress/index.html
 
 // 早期版本的浏览器需要用BlobBuilder来构造Blob，创建一个通用构造器来兼容早期版本
-window.BlobConstructor = ((function () {
+var BlobConstructor = ((function () {
     try {
         new Blob();
         return true;
@@ -90,6 +90,6 @@ function FormDataShim () {
 
 
 module.exports = {
-    Blob    : window.BlobConstructor,
+    Blob    : BlobConstructor,
     FormData: hasFormDataBug() ? FormDataShim : FormData
 };

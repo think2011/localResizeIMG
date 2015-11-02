@@ -25,6 +25,7 @@ var UA = (function (userAgent) {
     }
 })(navigator.userAgent);
 
+
 function Lrz (file, opts) {
     var that = this;
 

@@ -2,8 +2,9 @@
 __webpack_public_path__ = getJsDir('lrz') + '/';
 window.URL              = window.URL || window.webkitURL;
 
-var Promise = require('Promise'),
-    exif    = require('exif');
+var Promise          = require('Promise'),
+    BlobFormDataShim = require('Blob.FormData.shim'),
+    exif             = require('exif');
 
 
 var UA = (function (userAgent) {
@@ -76,7 +77,7 @@ Lrz.prototype.init = function () {
                     return base64;
                 })
                 .then(function (base64) {
-                    var formData = new FormData(),
+                    var formData = new BlobFormDataShim.FormData(),
                         file     = dataURItoBlob(base64),
                         size     = base64.length;
 
@@ -346,7 +347,7 @@ function dataURItoBlob (dataURI) {
         ia[i] = byteString.charCodeAt(i);
     }
 
-    return new Blob([ia], {type: mimeString});
+    return new BlobFormDataShim.Blob([ia], {type: mimeString});
 }
 
 window.lrz = function (file, opts) {

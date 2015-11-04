@@ -37,15 +37,15 @@ document.querySelector('input').addEventListener('change', function () {
     var that = this;
 
     lrz(that.files[0], {
-        width: 1024
+        width: 800
     })
         .then(function (rst) {
-            var img        = new Image(),
-                div        = document.createElement('div'),
-                p          = document.createElement('p'),
+            var img = new Image(),
+                div = document.createElement('div'),
+                p = document.createElement('p'),
                 sourceSize = toFixed2(that.files[0].size / 1024),
                 resultSize = toFixed2(rst.fileLen / 1024),
-                scale      = parseInt(100 - (resultSize / sourceSize * 100));
+                scale = parseInt(100 - (resultSize / sourceSize * 100));
 
             /* ==================================================== */
             // 原生ajax上传代码，所以看起来特别多 ╮(╯_╰)╭，但绝对能用

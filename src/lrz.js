@@ -261,6 +261,11 @@ Lrz.prototype._getResize = function () {
         height: img.height
     };
 
+    if ("5678".indexOf(orientation) > -1) {
+        ret.width  = img.height;
+        ret.height = img.width;
+    }
+
     // 如果原图小于设定，采用原图
     if (ret.width < width || ret.height < height) {
         return ret;

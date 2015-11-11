@@ -47,36 +47,6 @@ document.querySelector('input').addEventListener('change', function () {
                 resultSize = toFixed2(rst.fileLen / 1024),
                 scale = parseInt(100 - (resultSize / sourceSize * 100));
 
-            /* ==================================================== */
-            // 原生ajax上传代码，所以看起来特别多 ╮(╯_╰)╭，但绝对能用
-            // 其他框架，例如ajax处理formData略有不同，请自行google，baidu。
-            var xhr = new XMLHttpRequest();
-            xhr.open('POST', '/upload');
-
-            xhr.onload = function () {
-                if (xhr.status === 200) {
-                    // 上传成功
-                } else {
-                    // 处理其他情况
-                }
-            };
-
-            xhr.onerror = function () {
-                // 处理错误
-            };
-
-            xhr.upload.onprogress = function (e) {
-                // 上传进度
-                var percentComplete = ((e.loaded / e.total) || 0) * 100;
-            };
-
-            // 添加参数和触发上传
-            rst.formData.append('a', '我是参数');
-            xhr.send(rst.formData);
-            /* ==================================================== */
-
-            console.info('这里有一段ajax请求，看见出错是正常的');
-
             p.style.fontSize = 13 + 'px';
             p.innerHTML      = '源文件：<span class="text-danger">' +
                 sourceSize + 'KB' +
@@ -94,6 +64,34 @@ document.querySelector('input').addEventListener('change', function () {
             };
 
             img.src = rst.base64;
+
+            /*            /!* ==================================================== *!/
+             // 原生ajax上传代码，所以看起来特别多 ╮(╯_╰)╭，但绝对能用
+             // 其他框架，例如ajax处理formData略有不同，请自行google，baidu。
+             var xhr = new XMLHttpRequest();
+             xhr.open('POST', '/upload');
+
+             xhr.onload = function () {
+             if (xhr.status === 200) {
+             // 上传成功
+             } else {
+             // 处理其他情况
+             }
+             };
+
+             xhr.onerror = function () {
+             // 处理错误
+             };
+
+             xhr.upload.onprogress = function (e) {
+             // 上传进度
+             var percentComplete = ((e.loaded / e.total) || 0) * 100;
+             };
+
+             // 添加参数和触发上传
+             rst.formData.append('a', '我是参数');
+             xhr.send(rst.formData);
+             /!* ==================================================== *!/*/
 
             return rst;
         });

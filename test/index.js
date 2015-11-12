@@ -83,6 +83,7 @@ document.querySelector('input').addEventListener('change', function () {
              // 处理错误
              };
 
+             // issues #45 提到似乎有兼容性问题,关于progress
              xhr.upload.onprogress = function (e) {
              // 上传进度
              var percentComplete = ((e.loaded / e.total) || 0) * 100;

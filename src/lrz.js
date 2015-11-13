@@ -51,15 +51,17 @@ function Lrz (file, opts) {
 }
 
 Lrz.prototype.init = function () {
-    var that   = this,
-        file   = that.file,
-        img    = new Image(),
-        canvas = document.createElement('canvas'),
-        blob   = (typeof file === 'string') ? file : URL.createObjectURL(file);
+    var that         = this,
+        file         = that.file,
+        fileIsString = typeof file === 'string',
+        img          = new Image(),
+        canvas       = document.createElement('canvas'),
+        blob         = fileIsString ? file : URL.createObjectURL(file);
 
-    that.img    = img;
-    that.blob   = blob;
-    that.canvas = canvas;
+    that.img      = img;
+    that.blob     = blob;
+    that.canvas   = canvas;
+    that.fileName = fileIsString ? (file.split('/').pop()) : file.name;
 
     if (!document.createElement('canvas').getContext) {
         throw new Error('浏览器不支持canvas');
@@ -88,7 +90,7 @@ Lrz.prototype.init = function () {
                         size = file.size;
                     }
 
-                    formData.append(that.defaults.fieldName, file);
+                    formData.append(that.defaults.fieldName, file, (that.fileName.replace(/\..+/g, '.jpg')));
 
                     resolve({
                         formData: formData,

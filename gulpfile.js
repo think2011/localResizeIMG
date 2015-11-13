@@ -11,9 +11,11 @@ var paths = {
 };
 
 var files = {
-    js  : [paths.src + "/**/*.js"],
-    txt : [paths.src + "/**/*.txt"],
-    html: paths.test + '/**/*.html'
+    js       : paths.src + "/**/*.js",
+    txt      : paths.src + "/**/*.txt",
+    html     : paths.test + '/**/*.html',
+    lrzAll   : paths.dist + '/lrz.all.bundle.js',
+    lrzAllMap: paths.dist + '/lrz.all.bundle.js.map'
 };
 
 // 默认
@@ -84,7 +86,16 @@ gulp.task('build:html', ['build:js'], function () {
         .pipe(gulp.dest(paths.test));
 });
 
-gulp.task('build:copy', function () {
+gulp.task('build:copy', ['build:html'], function () {
+    // 未来可能可能采用 #48
+ /*   gulp.src(files.lrzAll)
+        .pipe(plugins.rename('index.js'))
+        .pipe(gulp.dest('./'));
+
+    gulp.src(files.lrzAllMap)
+        .pipe(plugins.rename('index.js.map'))
+        .pipe(gulp.dest('./'));*/
+
     return gulp.src(files.txt)
         .pipe(gulp.dest(paths.dist));
 });

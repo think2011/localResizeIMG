@@ -89,8 +89,11 @@ document.querySelector('input').addEventListener('change', function () {
              var percentComplete = ((e.loaded / e.total) || 0) * 100;
              };
 
-             // 添加参数和触发上传
-             rst.formData.append('a', '我是参数');
+             // 添加参数
+             rst.formData.append('fileLen', rst.fileLen);
+             rst.formData.append('xxx', '我是其他参数');
+
+             // 触发上传
              xhr.send(rst.formData);
              /!* ==================================================== *!/*/
 

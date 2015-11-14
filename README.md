@@ -8,7 +8,7 @@
 
 # 自己试试
 
-![](http://think2011.github.io/localResizeIMG/test/qrcode.png)
+![](https://raw.github.com/think2011/localResizeIMG/master/test/qrcode.png)
 
 
 [点我直接进入演示页面](http://think2011.github.io/localResizeIMG/test/)

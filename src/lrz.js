@@ -81,22 +81,21 @@ Lrz.prototype.init = function () {
                 })
                 .then(function (base64) {
                     var formData = new BlobFormDataShim.FormData(),
-                        file     = dataURItoBlob(base64),
-                        size     = base64.length;
+                        file     = dataURItoBlob(base64);
 
                     // 压缩文件太大就采用源文件
                     if (typeof that.file === 'object' && base64.length > that.file.size) {
                         file = that.file;
-                        size = file.size;
                     }
 
                     formData.append(that.defaults.fieldName, file, (that.fileName.replace(/\..+/g, '.jpg')));
 
                     resolve({
-                        formData: formData,
-                        fileLen : size,
+                        formData : formData,
+                        fileLen : file.size,
                         base64  : base64,
-                        origin  : that.file
+                        base64Len: base64.length,
+                        origin   : that.file
                     });
 
                     // 释放内存

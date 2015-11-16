@@ -29,8 +29,8 @@
 
 通过以下方式都可以下载：
 
-1. 执行`bower install lrz`（推荐）
-2. 执行`npm i lrz`
+1. 执行`npm i lrz`（推荐）
+2. 执行`bower install lrz`
 
 接着在页面中引入
 ```html

@@ -354,7 +354,7 @@ function dataURItoBlob (dataURI) {
         ia[i] = byteString.charCodeAt(i);
     }
 
-    return new BlobFormDataShim.Blob([ia], {type: mimeString});
+    return new BlobFormDataShim.Blob([ia.buffer], {type: mimeString});
 }
 
 window.lrz = function (file, opts) {

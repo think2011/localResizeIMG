@@ -5,9 +5,9 @@ var packageJSON   = require('./package.json');
 var webpack       = require("webpack");
 
 var paths = {
-    src : './src',
-    dist: './dist',
-    test: './test'
+    src : 'src',
+    dist: 'dist',
+    test: 'test'
 };
 
 var files = {
@@ -26,7 +26,8 @@ gulp.task('default', ['clean'], function () {
 // 开发
 gulp.task('dev', function () {
     gulp.start([
-        'dev:js'
+        'dev:js',
+        'build:html'
     ]);
 });
 
@@ -88,13 +89,13 @@ gulp.task('build:html', ['build:js'], function () {
 
 gulp.task('build:copy', ['build:html'], function () {
     // 未来可能可能采用 #48
- /*   gulp.src(files.lrzAll)
-        .pipe(plugins.rename('index.js'))
-        .pipe(gulp.dest('./'));
+    /*   gulp.src(files.lrzAll)
+     .pipe(plugins.rename('index.js'))
+     .pipe(gulp.dest('./'));
 
-    gulp.src(files.lrzAllMap)
-        .pipe(plugins.rename('index.js.map'))
-        .pipe(gulp.dest('./'));*/
+     gulp.src(files.lrzAllMap)
+     .pipe(plugins.rename('index.js.map'))
+     .pipe(gulp.dest('./'));*/
 
     return gulp.src(files.txt)
         .pipe(gulp.dest(paths.dist));

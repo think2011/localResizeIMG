@@ -92,7 +92,7 @@ Lrz.prototype.init = function () {
 
                     resolve({
                         formData : formData,
-                        fileLen : file.size,
+                        fileLen : +file.size,
                         base64  : base64,
                         base64Len: base64.length,
                         origin   : that.file

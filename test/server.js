@@ -94,15 +94,17 @@ document.querySelector('input').addEventListener('change', function () {
             };
 
             // issues #45 提到似乎有兼容性问题,关于progress
-            try {
-                xhr.upload.onprogress = function (e) {
-                    if (!e.lengthComputable) return false;
+            if (xhr.upload) {
+                try {
+                    xhr.upload.addEventListener('progress', function (e) {
+                        if (!e.lengthComputable) return false;
 
-                    // 上传进度
-                    progress.value = ((e.loaded / e.total) || 0) * 100;
-                };
-            } catch (err) {
-                console.error('看起来进度展示错误了,似乎不支持此特性?', err);
+                        // 上传进度
+                        progress.value = ((e.loaded / e.total) || 0) * 100;
+                    });
+                } catch (err) {
+                    console.error('进度展示出错了,似乎不支持此特性?', err);
+                }
             }
 
             // 添加参数

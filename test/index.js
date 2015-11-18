@@ -60,7 +60,7 @@ document.querySelector('input').addEventListener('change', function () {
             div.appendChild(p);
 
             img.onload = function () {
-                that.parentNode.appendChild(div);
+                document.querySelector('#upload-container').appendChild(div);
             };
 
             img.src = rst.base64;

@@ -29,7 +29,8 @@ function hasFormDataBug () {
         && ~navigator.vendor.indexOf('Google')
         && !~navigator.userAgent.indexOf('Chrome');
 
-    return bCheck && navigator.userAgent.match(/AppleWebKit\/(\d+)/).pop() <= 534;
+    // QQ浏览器也有这个BUG
+    return bCheck && navigator.userAgent.match(/AppleWebKit\/(\d+)/).pop() <= 534 || /MQQBrowser/g.test(userAgent);
 }
 function FormDataShim () {
     var

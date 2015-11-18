@@ -80,12 +80,15 @@ Lrz.prototype.init = function () {
                     return base64;
                 })
                 .then(function (base64) {
-                    var formData = new BlobFormDataShim.FormData(),
-                        file     = dataURItoBlob(base64);
+                    var formData = null;
 
-                    // 压缩文件太大就采用源文件
+                    // 压缩文件太大就采用源文件,且使用原生的FormData() @source #55
                     if (typeof that.file === 'object' && base64.length > that.file.size) {
-                        file = that.file;
+                        formData = new FormData();
+                        file     = that.file;
+                    } else {
+                        formData = new BlobFormDataShim.FormData();
+                        file     = dataURItoBlob(base64);
                     }
 
                     formData.append(that.defaults.fieldName, file, (that.fileName.replace(/\..+/g, '.jpg')));

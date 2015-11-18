@@ -94,12 +94,18 @@ document.querySelector('input').addEventListener('change', function () {
             };
 
             // issues #45 提到似乎有兼容性问题,关于progress
-            xhr.addEventListener('progress', function (e) {
-                if (!e.lengthComputable) return false;
+            if (xhr.upload) {
+                try {
+                    xhr.upload.addEventListener('progress', function (e) {
+                        if (!e.lengthComputable) return false;
 
-                // 上传进度
-                progress.value = ((e.loaded / e.total) || 0) * 100;
-            });
+                        // 上传进度
+                        progress.value = ((e.loaded / e.total) || 0) * 100;
+                    });
+                } catch (err) {
+                    console.error('进度展示出错了,似乎不支持此特性?', err);
+                }
+            }
 
             // 添加参数
             rst.formData.append('fileLen', rst.fileLen);

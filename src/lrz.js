@@ -54,14 +54,20 @@ Lrz.prototype.init = function () {
     var that         = this,
         file         = that.file,
         fileIsString = typeof file === 'string',
+        fileIsBase64 = /^data:/.test(file),
         img          = new Image(),
         canvas       = document.createElement('canvas'),
         blob         = fileIsString ? file : URL.createObjectURL(file);
 
-    that.img      = img;
-    that.blob     = blob;
-    that.canvas   = canvas;
-    that.fileName = fileIsString ? (file.split('/').pop()) : file.name;
+    that.img    = img;
+    that.blob   = blob;
+    that.canvas = canvas;
+
+    if (fileIsString) {
+        that.fileName = fileIsBase64 ? 'base64.jpg' : (file.split('/').pop());
+    } else {
+        that.fileName = file.name;
+    }
 
     if (!document.createElement('canvas').getContext) {
         throw new Error('浏览器不支持canvas');
@@ -111,7 +117,8 @@ Lrz.prototype.init = function () {
                 });
         };
 
-        img.crossOrigin = "*";
+        // 如果传入的是base64在移动端会报错
+        !fileIsBase64 && (img.crossOrigin = "*");
 
         img.src = blob;
     });

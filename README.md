@@ -82,6 +82,25 @@ lrz('./xxx/xx/x.png')
         });
 ```
 
+# JQuery 处理
+例子中给的是原生ajax的方式，下面是JQuery上传的方式
+
+```js
+// 额外添加参数
+rst.formData.append('fileLen', rst.fileLen);
+ 
+$.ajax({
+    url: 'http://koa-upload.coding.io', // 这个地址做了跨域处理，可以用于实际调试
+    data: rst.formData,
+    processData: false,
+    contentType: false,
+    type: 'POST',
+    success: function (data) {
+        alert(JSON.stringify(data));
+    }
+});
+```
+
 # 后端处理
 
 [后端处理请查看WIKI。](https://github.com/think2011/localResizeIMG/wiki)

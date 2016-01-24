@@ -82,7 +82,7 @@ lrz('./xxx/xx/x.png')
         });
 ```
 
-# JQuery 处理
+### JQuery 方式上传
 例子中给的是原生ajax的方式，下面是JQuery上传的方式
 
 注意！！：使用 `zepto` 的朋友请用 `原生代替`，在某些 `android` 设备下用 `zepto` 会出现不发送 `Content-Type` 导致无法上传的BUG。 感谢 @Poised_flw

@@ -101,6 +101,9 @@ $.ajax({
 });
 ```
 
+注意：使用 `zepto` 的朋友请用 `原生代替`，在某些 `android` 设备下用 `zepto` 会出现不发送 `Content-Type` 导致无法上传的BUG。 感谢 @Poised_flw
+
+
 # 后端处理
 
 [后端处理请查看WIKI。](https://github.com/think2011/localResizeIMG/wiki)

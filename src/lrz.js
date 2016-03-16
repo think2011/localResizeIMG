@@ -104,7 +104,8 @@ Lrz.prototype.init = function () {
                         fileLen : +file.size,
                         base64  : base64,
                         base64Len: base64.length,
-                        origin   : that.file
+                        origin   : that.file,
+                        file   : file
                     });
 
                     // 释放内存

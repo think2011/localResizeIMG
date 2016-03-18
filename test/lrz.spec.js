@@ -6,7 +6,7 @@ describe("测试压缩正常运作", function () {
     it("基本例子:传入路径", function () {
         return lrz('base/test/img/transparent_png.png')
             .then(function (rst) {
-                expect(rst).to.all.keys('formData', 'origin', 'base64', 'fileLen', 'base64Len');
+                expect(rst).to.all.keys('formData', 'origin', 'base64', 'fileLen', 'base64Len', 'file');
             });
     });
 
@@ -15,7 +15,7 @@ describe("测试压缩正常运作", function () {
 
         return lrz(base64)
             .then(function (rst) {
-                expect(rst).to.all.keys('formData', 'origin', 'base64', 'fileLen', 'base64Len');
+                expect(rst).to.all.keys('formData', 'origin', 'base64', 'fileLen', 'base64Len', 'file');
             });
     });
 });

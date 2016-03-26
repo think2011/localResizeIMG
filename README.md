@@ -27,6 +27,8 @@
 
 3. 原生JS编写，不依赖例如`jquery`等第三方库，支持AMD or CMD规范。
 
+> 尽管如此，在某些 `Android` 下依然有莫名其妙的问题，在您使用前，请一定大致浏览下 [issues](https://github.com/think2011/localResizeIMG/issues)
+
 # 如何获取
 
 通过以下方式都可以下载：

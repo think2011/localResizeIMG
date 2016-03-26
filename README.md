@@ -149,7 +149,7 @@ IE10以上及大部分非IE浏览器（chrome、微信什么的）
 
 # 开发
 
-[想要参与 or 自己定制 or 了解源码请点击这里，逻辑和说明](https://github.com/think2011/localResizeIMG/wiki/%E5%BC%80%E5%8F%91)
+[想要参与 or 自己定制 or 了解源码请点击这里，逻辑和说明](https://github.com/think2011/localResizeIMG/wiki/3.-%E6%BA%90%E7%A0%81%E9%80%BB%E8%BE%91)
 
 # 感谢
 

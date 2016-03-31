@@ -54,9 +54,10 @@
 接着通过change事件可以得到用户选择的图片
 ```js
 document.querySelector('#file').addEventListener('change', function () {
- lrz(this.files[0])
+	lrz(this.files[0])
         .then(function (rst) {
             // 处理成功会执行
+            console.log(rst);
         })
         .catch(function (err) {
             // 处理失败会执行

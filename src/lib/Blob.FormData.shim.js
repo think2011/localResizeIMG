@@ -96,7 +96,7 @@ var FormDataShim=(function(){
                 oldSend.call(this, val);
             }
         };
-    }；
+    };
 })();
 
 

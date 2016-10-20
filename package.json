@@ -1,6 +1,6 @@
 {
   "name": "lrz",
-  "version": "4.9.37",
+  "version": "4.9.40",
   "description": "前端本地客户端压缩图片，兼容IOS，Android，PC、自动按需加载文件",
   "main": "dist/lrz.all.bundle.js",
   "scripts": {

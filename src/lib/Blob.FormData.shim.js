@@ -34,7 +34,7 @@ function hasFormDataBug () {
 }
 var FormDataShim=(function(){
     var formDataShimNums = 0;
-    return function FormDataShim () {
+    function FormDataShim () {
         var
         // Store a reference to this
         o        = this,
@@ -97,6 +97,8 @@ var FormDataShim=(function(){
             }
         };
     };
+    FormDataShim.prototype = Object.create(FormData.prototype);
+    return FormDataShim;
 })();
 
 

@@ -75,13 +75,19 @@ Lrz.prototype.init = function () {
 
     return new Promise(function (resolve, reject) {
         img.onerror = function () {
-            throw new Error('加载图片文件失败');
+            var err = new Error('加载图片文件失败');
+            reject(err);
+            throw err;
         };
 
         img.onload = function () {
             that._getBase64()
                 .then(function (base64) {
-                    if (base64.length < 10) reject('生成base64失败');
+                    if (base64.length < 10) {
+                        var err = new Error('生成base64失败');
+                        reject(err);
+                        throw err;
+                    }
 
                     return base64;
                 })

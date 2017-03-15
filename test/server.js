@@ -69,7 +69,7 @@ document.querySelector('input').addEventListener('change', function () {
             // 原生ajax上传代码，所以看起来特别多 ╮(╯_╰)╭，但绝对能用
             // 其他框架，例如ajax处理formData略有不同，请自行google，baidu。
             var xhr = new XMLHttpRequest();
-            xhr.open('POST', 'http://koa-upload.coding.io');
+            xhr.open('POST', 'http://koa-upload.herokuapp.com');
 
             xhr.onload = function () {
                 var data = JSON.parse(xhr.response);
@@ -122,7 +122,7 @@ document.querySelector('input').addEventListener('change', function () {
 document.querySelector('#version').innerHTML = lrz.version;
 document.querySelector('.UA').innerHTML      = 'UA: ' + navigator.userAgent;
 
-function toFixed2 (num) {
+function toFixed2(num) {
     return parseFloat(+num.toFixed(2));
 }
 
@@ -150,7 +150,7 @@ String.prototype.render = function (obj) {
  * @param event
  * @returns {boolean}
  */
-function fireEvent (element, event) {
+function fireEvent(element, event) {
     var evt;
 
     if (document.createEventObject) {

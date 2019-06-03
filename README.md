@@ -5,20 +5,19 @@
 # 🚨重要!!
 
 很抱歉，这个项目已不再维护了，可能很长一段时间都不会更新了。
-如果真的需要，请使用之前请一定留意 [Issues](https://github.com/think2011/localResizeIMG/issues?q=is%3Aissue+is%3Aopen+label%3Abug) 里已知的问题
 
-# 演示一下
+# 演示
 
 ![](http://think2011.github.io/localResizeIMG/test/demo.gif)
 
-# 自己试试
+# 试试
 
 ![](https://raw.github.com/think2011/localResizeIMG/master/test/qrcode.png)
 
 
 [点我直接进入演示页面](http://think2011.github.io/localResizeIMG/test/)
 
-# 说明
+# 简述
 在客户端压缩好要上传的图片可以节省带宽更快的发送给后端，特别适合在移动设备上使用。
 
 # 为什么需要
@@ -114,11 +113,8 @@ IE10以上及大部分非IE浏览器（chrome、微信什么的）
 
 平台：微信..
 设备：iPhone5 IOS7..
-问题：问题描述呗..
+问题：问题描述..
 ```
-
-* Q：能否提供完整的一套UI?
-* A：暂时定位是作为纯粹的处理插件，或许会考虑开发一整套UI。
 
 * Q：有时拍摄完照片后，页面自动刷新或闪退了。
 * A：虽然已作了优化处理，但内存似乎还是爆掉了，常见于低配android手机，建议每次只处理一张图片。
@@ -131,10 +127,6 @@ IE10以上及大部分非IE浏览器（chrome、微信什么的）
 
 * Q: 想要商用可以吗？
 * A: 没问题，但请留意issue里已知的问题。
-
-# 开发
-
-[想要参与 or 自己定制 or 了解源码请点击这里，逻辑和说明](https://github.com/think2011/localResizeIMG/wiki/3.-%E6%BA%90%E7%A0%81%E9%80%BB%E8%BE%91)
 
 # 感谢
 

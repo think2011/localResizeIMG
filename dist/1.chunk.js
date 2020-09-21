@@ -1,2 +1,278 @@
-webpackJsonp([1],{6:function(t,e,a){var r,n;!function(){function a(t){var e=t.naturalWidth,a=t.naturalHeight;if(e*a>1048576){var r=document.createElement("canvas");r.width=r.height=1;var n=r.getContext("2d");return n.drawImage(t,-e+1,0),0===n.getImageData(0,0,1,1).data[3]}return!1}function i(t,e,a){var r=document.createElement("canvas");r.width=1,r.height=a;var n=r.getContext("2d");n.drawImage(t,0,0);for(var i=n.getImageData(0,0,1,a).data,o=0,c=a,s=a;s>o;){var h=i[4*(s-1)+3];0===h?c=s:o=s,s=c+o>>1}var d=s/a;return 0===d?1:d}function o(t,e,a){var r=document.createElement("canvas");return c(t,r,e,a),r.toDataURL("image/jpeg",e.quality||.8)}function c(t,e,r,n){var o=t.naturalWidth,c=t.naturalHeight,h=r.width,d=r.height,g=e.getContext("2d");g.save(),s(e,g,h,d,r.orientation);var l=a(t);l&&(o/=2,c/=2);var u=1024,w=document.createElement("canvas");w.width=w.height=u;for(var f=w.getContext("2d"),v=n?i(t,o,c):1,m=Math.ceil(u*h/o),b=Math.ceil(u*d/c/v),L=0,I=0;c>L;){for(var p=0,R=0;o>p;)f.clearRect(0,0,u,u),f.drawImage(t,-p,-L),g.drawImage(w,0,0,u,u,R,I,m,b),p+=u,R+=m;L+=u,I+=b}g.restore(),w=f=null}function s(t,e,a,r,n){switch(n){case 5:case 6:case 7:case 8:t.width=r,t.height=a;break;default:t.width=a,t.height=r}switch(n){case 2:e.translate(a,0),e.scale(-1,1);break;case 3:e.translate(a,r),e.rotate(Math.PI);break;case 4:e.translate(0,r),e.scale(1,-1);break;case 5:e.rotate(.5*Math.PI),e.scale(1,-1);break;case 6:e.rotate(.5*Math.PI),e.translate(0,-r);break;case 7:e.rotate(.5*Math.PI),e.translate(a,-r),e.scale(-1,1);break;case 8:e.rotate(-.5*Math.PI),e.translate(-a,0)}}function h(t){if(window.Blob&&t instanceof Blob){var e=new Image,a=window.URL&&window.URL.createObjectURL?window.URL:window.webkitURL&&window.webkitURL.createObjectURL?window.webkitURL:null;if(!a)throw Error("No createObjectURL function found to create blob url");e.src=a.createObjectURL(t),this.blob=t,t=e}if(!t.naturalWidth&&!t.naturalHeight){var r=this;t.onload=function(){var t=r.imageLoadListeners;if(t){r.imageLoadListeners=null;for(var e=0,a=t.length;a>e;e++)t[e]()}},this.imageLoadListeners=[]}this.srcImage=t}h.prototype.render=function(t,e,a){if(this.imageLoadListeners){var r=this;return void this.imageLoadListeners.push(function(){r.render(t,e,a)})}e=e||{};var n=this.srcImage,i=n.src,s=i.length,h=n.naturalWidth,d=n.naturalHeight,g=e.width,l=e.height,u=e.maxWidth,w=e.maxHeight,f=this.blob&&"image/jpeg"===this.blob.type||0===i.indexOf("data:image/jpeg")||i.indexOf(".jpg")===s-4||i.indexOf(".jpeg")===s-5;g&&!l?l=d*g/h<<0:l&&!g?g=h*l/d<<0:(g=h,l=d),u&&g>u&&(g=u,l=d*g/h<<0),w&&l>w&&(l=w,g=h*l/d<<0);var v={width:g,height:l};for(var m in e)v[m]=e[m];var b=t.tagName.toLowerCase();"img"===b?t.src=o(this.srcImage,v,f):"canvas"===b&&c(this.srcImage,t,v,f),"function"==typeof this.onrender&&this.onrender(t),a&&a()},r=[],n=function(){return h}.apply(e,r),!(void 0!==n&&(t.exports=n))}()}});
-//# sourceMappingURL=1.chunk.js.map
+webpackJsonp([1],{
+
+/***/ 7:
+/***/ (function(module, exports, __webpack_require__) {
+
+	var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/**
+	 * Mega pixel image rendering library for iOS6 Safari
+	 *
+	 * Fixes iOS6 Safari's image file rendering issue for large size image (over mega-pixel),
+	 * which causes unexpected subsampling when drawing it in canvas.
+	 * By using this library, you can safely render the image with proper stretching.
+	 *
+	 * Copyright (c) 2012 Shinichi Tomita <shinichi.tomita@gmail.com>
+	 * Released under the MIT license
+	 */
+	(function () {
+
+	    /**
+	     * Detect subsampling in loaded image.
+	     * In iOS, larger images than 2M pixels may be subsampled in rendering.
+	     */
+	    function detectSubsampling (img) {
+	        var iw = img.naturalWidth, ih = img.naturalHeight;
+	        if (iw * ih > 1024 * 1024) { // subsampling may happen over megapixel image
+	            var canvas   = document.createElement('canvas');
+	            canvas.width = canvas.height = 1;
+	            var ctx = canvas.getContext('2d');
+	            ctx.drawImage(img, -iw + 1, 0);
+	            // subsampled image becomes half smaller in rendering size.
+	            // check alpha channel value to confirm image is covering edge pixel or not.
+	            // if alpha value is 0 image is not covering, hence subsampled.
+	            return ctx.getImageData(0, 0, 1, 1).data[3] === 0;
+	        } else {
+	            return false;
+	        }
+	    }
+
+	    /**
+	     * Detecting vertical squash in loaded image.
+	     * Fixes a bug which squash image vertically while drawing into canvas for some images.
+	     */
+	    function detectVerticalSquash (img, iw, ih) {
+	        var canvas    = document.createElement('canvas');
+	        canvas.width  = 1;
+	        canvas.height = ih;
+	        var ctx       = canvas.getContext('2d');
+	        ctx.drawImage(img, 0, 0);
+	        var data      = ctx.getImageData(0, 0, 1, ih).data;
+	        // search image edge pixel position in case it is squashed vertically.
+	        var sy = 0;
+	        var ey = ih;
+	        var py = ih;
+	        while (py > sy) {
+	            var alpha = data[(py - 1) * 4 + 3];
+	            if (alpha === 0) {
+	                ey = py;
+	            } else {
+	                sy = py;
+	            }
+	            py = (ey + sy) >> 1;
+	        }
+	        var ratio = (py / ih);
+	        return (ratio === 0) ? 1 : ratio;
+	    }
+
+	    /**
+	     * Rendering image element (with resizing) and get its data URL
+	     */
+	    function renderImageToDataURL (img, options, doSquash) {
+	        var canvas = document.createElement('canvas');
+	        renderImageToCanvas(img, canvas, options, doSquash);
+	        return canvas.toDataURL("image/jpeg", options.quality || 0.8);
+	    }
+
+	    /**
+	     * Rendering image element (with resizing) into the canvas element
+	     */
+	    function renderImageToCanvas (img, canvas, options, doSquash) {
+	        var iw         = img.naturalWidth, ih = img.naturalHeight;
+	        var width      = options.width, height = options.height;
+	        var ctx        = canvas.getContext('2d');
+	        ctx.save();
+	        transformCoordinate(canvas, ctx, width, height, options.orientation);
+	        var subsampled = detectSubsampling(img);
+	        if (subsampled) {
+	            iw /= 2;
+	            ih /= 2;
+	        }
+	        var d = 1024; // size of tiling canvas
+	        var tmpCanvas   = document.createElement('canvas');
+	        tmpCanvas.width = tmpCanvas.height = d;
+	        var tmpCtx          = tmpCanvas.getContext('2d');
+	        var vertSquashRatio = doSquash ? detectVerticalSquash(img, iw, ih) : 1;
+	        var dw              = Math.ceil(d * width / iw);
+	        var dh              = Math.ceil(d * height / ih / vertSquashRatio);
+	        var sy              = 0;
+	        var dy              = 0;
+	        while (sy < ih) {
+	            var sx = 0;
+	            var dx = 0;
+	            while (sx < iw) {
+	                tmpCtx.clearRect(0, 0, d, d);
+	                tmpCtx.drawImage(img, -sx, -sy);
+	                ctx.drawImage(tmpCanvas, 0, 0, d, d, dx, dy, dw, dh);
+	                sx += d;
+	                dx += dw;
+	            }
+	            sy += d;
+	            dy += dh;
+	        }
+	        ctx.restore();
+	        tmpCanvas           = tmpCtx = null;
+	    }
+
+	    /**
+	     * Transform canvas coordination according to specified frame size and orientation
+	     * Orientation value is from EXIF tag
+	     */
+	    function transformCoordinate (canvas, ctx, width, height, orientation) {
+	        switch (orientation) {
+	            case 5:
+	            case 6:
+	            case 7:
+	            case 8:
+	                canvas.width  = height;
+	                canvas.height = width;
+	                break;
+	            default:
+	                canvas.width  = width;
+	                canvas.height = height;
+	        }
+	        switch (orientation) {
+	            case 2:
+	                // horizontal flip
+	                ctx.translate(width, 0);
+	                ctx.scale(-1, 1);
+	                break;
+	            case 3:
+	                // 180 rotate left
+	                ctx.translate(width, height);
+	                ctx.rotate(Math.PI);
+	                break;
+	            case 4:
+	                // vertical flip
+	                ctx.translate(0, height);
+	                ctx.scale(1, -1);
+	                break;
+	            case 5:
+	                // vertical flip + 90 rotate right
+	                ctx.rotate(0.5 * Math.PI);
+	                ctx.scale(1, -1);
+	                break;
+	            case 6:
+	                // 90 rotate right
+	                ctx.rotate(0.5 * Math.PI);
+	                ctx.translate(0, -height);
+	                break;
+	            case 7:
+	                // horizontal flip + 90 rotate right
+	                ctx.rotate(0.5 * Math.PI);
+	                ctx.translate(width, -height);
+	                ctx.scale(-1, 1);
+	                break;
+	            case 8:
+	                // 90 rotate left
+	                ctx.rotate(-0.5 * Math.PI);
+	                ctx.translate(-width, 0);
+	                break;
+	            default:
+	                break;
+	        }
+	    }
+
+
+	    /**
+	     * MegaPixImage class
+	     */
+	    function MegaPixImage (srcImage) {
+	        if (window.Blob && srcImage instanceof Blob) {
+	            var img = new Image();
+	            var URL = window.URL && window.URL.createObjectURL ? window.URL :
+	                window.webkitURL && window.webkitURL.createObjectURL ? window.webkitURL :
+	                    null;
+	            if (!URL) {
+	                throw Error("No createObjectURL function found to create blob url");
+	            }
+	            img.src   = URL.createObjectURL(srcImage);
+	            this.blob = srcImage;
+	            srcImage  = img;
+	        }
+	        if (!srcImage.naturalWidth && !srcImage.naturalHeight) {
+	            var _this               = this;
+	            srcImage.onload         = function () {
+	                var listeners = _this.imageLoadListeners;
+	                if (listeners) {
+	                    _this.imageLoadListeners = null;
+	                    for (var i = 0, len = listeners.length; i < len; i++) {
+	                        listeners[i]();
+	                    }
+	                }
+	            };
+	            this.imageLoadListeners = [];
+	        }
+	        this.srcImage = srcImage;
+	    }
+
+	    /**
+	     * Rendering megapix image into specified target element
+	     */
+	    MegaPixImage.prototype.render = function (target, options, callback) {
+	        if (this.imageLoadListeners) {
+	            var _this = this;
+	            this.imageLoadListeners.push(function () {
+	                _this.render(target, options, callback);
+	            });
+	            return;
+	        }
+	        options       = options || {};
+	        var srcImage  = this.srcImage,
+	            src       = srcImage.src,
+	            srcLength = src.length,
+	            imgWidth  = srcImage.naturalWidth, imgHeight = srcImage.naturalHeight,
+	            width     = options.width, height = options.height,
+	            maxWidth  = options.maxWidth, maxHeight = options.maxHeight,
+	            doSquash  = this.blob && this.blob.type === 'image/jpeg' ||
+	                src.indexOf('data:image/jpeg') === 0 ||
+	                src.indexOf('.jpg') === srcLength - 4 ||
+	                src.indexOf('.jpeg') === srcLength - 5;
+	        if (width && !height) {
+	            height = (imgHeight * width / imgWidth) << 0;
+	        } else if (height && !width) {
+	            width = (imgWidth * height / imgHeight) << 0;
+	        } else {
+	            width  = imgWidth;
+	            height = imgHeight;
+	        }
+	        if (maxWidth && width > maxWidth) {
+	            width  = maxWidth;
+	            height = (imgHeight * width / imgWidth) << 0;
+	        }
+	        if (maxHeight && height > maxHeight) {
+	            height = maxHeight;
+	            width  = (imgWidth * height / imgHeight) << 0;
+	        }
+	        var opt = {width: width, height: height};
+	        for (var k in options) opt[k] = options[k];
+
+	        var tagName = target.tagName.toLowerCase();
+	        if (tagName === 'img') {
+	            target.src = renderImageToDataURL(this.srcImage, opt, doSquash);
+	        } else if (tagName === 'canvas') {
+	            renderImageToCanvas(this.srcImage, target, opt, doSquash);
+	        }
+	        if (typeof this.onrender === 'function') {
+	            this.onrender(target);
+	        }
+	        if (callback) {
+	            callback();
+	        }
+	    };
+
+	    /**
+	     * Export class to global
+	     */
+	    if (true) {
+	        !(__WEBPACK_AMD_DEFINE_ARRAY__ = [], __WEBPACK_AMD_DEFINE_RESULT__ = function () {
+	            return MegaPixImage;
+	        }.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__)); // for AMD loader
+	    } else {
+	        this.MegaPixImage = MegaPixImage;
+	    }
+
+	})();
+
+
+/***/ })
+
+});

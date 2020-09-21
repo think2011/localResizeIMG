@@ -8,7 +8,7 @@ var Promise          = require('Promise'),
 
 
 var UA = (function (userAgent) {
-    var ISOldIOS     = /OS (\d)_.* like Mac OS X/g.exec(userAgent),
+    var ISOldIOS     = /OS (.*) like Mac OS X/g.exec(userAgent),
         isOldAndroid = /Android (\d.*?);/g.exec(userAgent) || /Android\/(\d.*?) /g.exec(userAgent);
 
     // 判断设备是否是IOS7以下
@@ -16,8 +16,10 @@ var UA = (function (userAgent) {
     // 判断是否iOS
     // 判断是否android
     // 判断是否QQ浏览器
+    var IOS_VERSION = ISOldIOS ? +ISOldIOS.pop().replace(/_/g, '.') : 0
     return {
-        oldIOS    : ISOldIOS ? +ISOldIOS.pop() < 8 : false,
+        oldIOS    : ISOldIOS ? IOS_VERSION < 8 : false,
+        newIOS    : ISOldIOS ? IOS_VERSION >= 13.4 : false,
         oldAndroid: isOldAndroid ? +isOldAndroid.pop().substr(0, 3) < 4.5 : false,
         iOS       : /\(i[^;]+;( U;)? CPU.+Mac OS X/.test(userAgent),
         android   : /Android/g.test(userAgent),
@@ -37,6 +39,7 @@ function Lrz (file, opts) {
         width    : null,
         height   : null,
         fieldName: 'file',
+        ingnoreOrientation: UA.iOS ? UA.newIOS : true,
         quality  : 0.7
     };
 
@@ -141,7 +144,7 @@ Lrz.prototype._getBase64 = function () {
         try {
             // 传入blob在android4.3以下有bug
             exif.getData(typeof file === 'object' ? file : img, function () {
-                that.orientation = exif.getTag(this, "Orientation");
+                that.orientation = that.defaults.ingnoreOrientation ? 0 : exif.getTag(this, "Orientation");
 
                 that.resize = that._getResize();
                 that.ctx    = canvas.getContext('2d');

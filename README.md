@@ -130,8 +130,9 @@ IE10以上及大部分非IE浏览器（chrome、微信什么的）
 
 # 感谢
 
-* @dwandw
-* @yourlin
-* @wxt2005
+* [dwandw](https://github.com/dwandw)
+* [yourlin](https://github.com/yourlin)
+* [wxt2005](https://github.com/wxt2005)
+* [LingRen](https://github.com/LingRen)
 
 以上在之前的版本帮忙参与维护的朋友，以及提出问题的朋友们，真的真的很感谢你们。：D

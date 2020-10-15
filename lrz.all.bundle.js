@@ -2505,7 +2505,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 	var UA = (function (userAgent) {
-	    var ISOldIOS     = /OS (.*) like Mac OS X/g.exec(userAgent),
+	    var ISOldIOS     = /OS (\d+(?:_\d)?)(?:_\d)* like Mac OS X/g.exec(userAgent),
 	        isOldAndroid = /Android (\d.*?);/g.exec(userAgent) || /Android\/(\d.*?) /g.exec(userAgent);
 
 	    // 判断设备是否是IOS7以下

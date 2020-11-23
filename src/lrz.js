@@ -8,7 +8,7 @@ var Promise          = require('Promise'),
 
 
 var UA = (function (userAgent) {
-    var ISOldIOS     = /OS (.*) like Mac OS X/g.exec(userAgent),
+    var ISOldIOS     = /OS (\d+(?:_\d)?)(?:_\d)* like Mac OS X/g.exec(userAgent),
         isOldAndroid = /Android (\d.*?);/g.exec(userAgent) || /Android\/(\d.*?) /g.exec(userAgent);
 
     // 判断设备是否是IOS7以下
@@ -39,7 +39,7 @@ function Lrz (file, opts) {
         width    : null,
         height   : null,
         fieldName: 'file',
-        ingnoreOrientation: UA.iOS ? UA.newIOS : true,
+        ingnoreOrientation: UA.newIOS,
         quality  : 0.7
     };
 
